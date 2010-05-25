@@ -14,4 +14,4 @@ to run gcover a folder structure like the folowing is required:
 	  |-\ 'test'		-> test related sources (excluded from code-coverage)	
 	  '-\ <output>		-> output folders (containing object and gcov files)
 
-usage: gcover <workspace-folder> [<output-folder>]
+usage: gcover -w <workspace-folder> [-o <output-folder>]
