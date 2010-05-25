@@ -1,0 +1,11 @@
+.metadata*
+.gcover*
+
+*.d
+*.o
+*.a
+*.exe
+
+*.gcno
+*.gcda
+*.gcov

@@ -1,0 +1,18 @@
+gcover is a ruby gem to generate gcov code-coverage for cppunit-tests 
+and display results in html-files.
+
+cppunit-test configurations must be compiled and executed with the following flags:
+
+C++ Compiler: 	-fprofile-arcs -ftest-coverage
+C++ Linker:		-fprofile-arcs
+
+folder structure like the folowing is required to run gcover:
+
+<workspace>
+  '-\ <project>
+	  |-\ <sources>		-> header & source folders
+	  |-\ 'test'		-> test related stuff excluded from code-coverage	
+	  '-\ <configs>		-> build configurations containing object-files
+  ...
+
+usage: gcover <workspace-folder> [<output-folder>]
