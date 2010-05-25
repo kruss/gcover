@@ -3,5 +3,4 @@
 require 'gcover'
 
 gcover = GCover.new()
-gcover.setParameter(ARGV)
 gcover.run()

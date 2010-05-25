@@ -88,11 +88,11 @@ private
 
 	def isExcludedSource(sourceFile)
 	
-		if $excludeTestSources then
+		if $AppOptions[:all] then
+			return false
+		else
 			relFolder = Pathname.new(File.dirname(sourceFile)).relative_path_from(Pathname.new(@projectFolder)).cleanpath.to_s
 			return relFolder.match(/^test/)
-		else
-			return false
 		end
 	end
 end

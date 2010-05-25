@@ -15,7 +15,7 @@ class SourceHtml
 		sourceStatistic = SourceStatistic.new(@testedSource)
 		
 		# header
-		html = HtmlUtil.getHeader($applicationName)
+		html = HtmlUtil.getHeader($AppName)
 		html << "<h1><a href='../index.htm'>&lt;&lt;</a> File [ "+sourceFileName+" ] - "+sourceStatistic.getCoverRatio.to_s+" %</h1> \n"
 		
 		# total

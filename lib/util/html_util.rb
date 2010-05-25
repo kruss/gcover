@@ -2,6 +2,7 @@
 class HtmlUtil
 
 	def HtmlUtil.getCss
+	
 		css =  "<style type='text/css'> \n"
 		css << "  h1				{ font-family:'Arial,sans-serif'; font-size:14pt; font-weight:bold; } \n"
 		css << "  h2				{ font-family:'Arial,sans-serif'; font-size:12pt; font-weight:bold; } \n"
@@ -30,7 +31,7 @@ class HtmlUtil
 	
 	def HtmlUtil.getFooter
 	
-		html =  "<a class='small' href='#top'>^-</a> \n"
+		html =  "<p class='small'><a href='#top'>^-</a></p> \n"
 		html << "<hr> \n"
 		html << "</body></html> \n"
 		return html

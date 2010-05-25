@@ -17,7 +17,7 @@ class ProjectHtml
 		projectStatistic = ProjectStatistic.new(@testedProject)
 		
 		# header
-		html = HtmlUtil.getHeader($applicationName)
+		html = HtmlUtil.getHeader($AppName)
 		html << "<h1><a href='../index.htm'>&lt;&lt;</a> Project [ "+projectName+" ] - "+projectStatistic.getCoverRatio.to_s+" %</h1> \n"
 
 		# total

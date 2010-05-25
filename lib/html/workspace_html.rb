@@ -24,7 +24,7 @@ class WorkspaceHtml
 		untestedProjects = gcovAnalyzer.untestedProjects.sort_by{|item| item}
 		
 		# header
-		html = HtmlUtil.getHeader($applicationName)
+		html = HtmlUtil.getHeader($AppName)
 		html << "<h1>Workspace [ "+@workspaceFolder+" ] - "+workspaceStatistic.getCoverRatio.to_s+" %</h1> \n"
 
 		# total
