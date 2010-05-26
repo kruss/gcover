@@ -24,7 +24,7 @@ class HtmlUtil
 	
 		html =  "<html><head><title>"+title+"</title> \n"
 		html << HtmlUtil.getCss
-		html << "</head><body><a name='top'/> \n"
+		html << "</head><body><a name='top'/></a> \n"
 		html << "<hr> \n"
 		return html
 	end
