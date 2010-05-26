@@ -32,6 +32,10 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+
 #endif
 
 static const std::string TRACE_START	= "%TRACES ";

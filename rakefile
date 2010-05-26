@@ -91,6 +91,6 @@ desc "run example unit-test"
 task :example_test => [:example_build] do
 
     cd "example/FooLib/UnitTest" do
-		sh "FooLib.exe"
+		sh "./FooLib.exe"
     end   
 end
