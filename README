@@ -6,12 +6,12 @@ cppunit-test configurations must be compiled and executed with the following fla
 C++ Compiler: 	-fprofile-arcs -ftest-coverage
 C++ Linker:		-fprofile-arcs
 
-to run gcover a folder structure like the folowing is required:
+to run gcover a folder structure like the folowing is assumed:
 
 <workspace>
   '-\ <project>
 	  |-\ <sources>		-> source folders
-	  |-\ 'test'		-> test related sources (excluded from code-coverage)	
+	  |-\ "test"		-> test related sources (excluded from code-coverage)	
 	  '-\ <output>		-> output folders (containing object and gcov files)
 
-usage: gcover -w <workspace-folder> [-o <output-folder>]
+usage: gcover <workspace> [options ...]

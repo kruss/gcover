@@ -6,6 +6,7 @@ require 'gcover'
 class TcOptions < Test::Unit::TestCase
 
 	def setup	
+		ARGV.clear() 
 	end
 	
 	def teardown
@@ -17,37 +18,38 @@ class TcOptions < Test::Unit::TestCase
 		gcover = GCover.new()
 		assert_equal(nil, $AppOptions[:workspace])
 		assert_equal(nil, $AppOptions[:output])
+		
 	end
 	
 	def test_option_workspace
-	
-		ARGV.clear()
-		ARGV << "-w" << "workspace"
+		
+		ARGV.clear() 
+		ARGV << "workspace"
 		GCover.new()
 		assert_equal("workspace", $AppOptions[:workspace])
 		assert_equal("workspace/"+$AppOutput, $AppOptions[:output])
 		
 		ARGV.clear()
-		ARGV << "-w" << "C:/workspace"
+		ARGV << "C:/workspace"
 		GCover.new()
 		assert_equal("C:/workspace", $AppOptions[:workspace])
 		assert_equal("C:/workspace/"+$AppOutput, $AppOptions[:output])
 		
 		ARGV.clear()
-		ARGV << "-w" << "C:\\workspace"
+		ARGV << "C:\\workspace"
 		GCover.new()
 		assert_equal("C:/workspace", $AppOptions[:workspace])
 		assert_equal("C:/workspace/"+$AppOutput, $AppOptions[:output])
 		
 		ARGV.clear()
-		ARGV << "-w" << "."
+		ARGV << "."
 		GCover.new()
 		current = Dir.getwd
 		assert_equal(current, $AppOptions[:workspace])
 		assert_equal(current+"/"+$AppOutput, $AppOptions[:output])
 		
 		ARGV.clear()
-		ARGV << "-w" << ".."
+		ARGV << ".."
 		GCover.new()
 		parent = Pathname.new(Dir.getwd+"/..").cleanpath.to_s
 		assert_equal(parent, $AppOptions[:workspace])
@@ -58,28 +60,28 @@ class TcOptions < Test::Unit::TestCase
 	def test_option_output
 	
 		ARGV.clear()
-		ARGV << "-w" << "workspace"
+		ARGV << "workspace"
 		ARGV << "-o" << "output"
 		GCover.new()
 		assert_equal("workspace", $AppOptions[:workspace])
 		assert_equal("output/"+$AppOutput, $AppOptions[:output])
 		
 		ARGV.clear()
-		ARGV << "-w" << "workspace"
+		ARGV << "workspace"
 		ARGV << "-o" << "C:/output"
 		GCover.new()
 		assert_equal("workspace", $AppOptions[:workspace])
 		assert_equal("C:/output/"+$AppOutput, $AppOptions[:output])
 		
 		ARGV.clear()
-		ARGV << "-w" << "workspace"
+		ARGV << "workspace"
 		ARGV << "-o" << "C:\\output"
 		GCover.new()
 		assert_equal("workspace", $AppOptions[:workspace])
 		assert_equal("C:/output/"+$AppOutput, $AppOptions[:output])
 		
 		ARGV.clear()
-		ARGV << "-w" << "workspace"
+		ARGV << "workspace"
 		ARGV << "-o" << "."
 		GCover.new()
 		current = Dir.getwd
@@ -87,7 +89,7 @@ class TcOptions < Test::Unit::TestCase
 		assert_equal(current+"/"+$AppOutput, $AppOptions[:output])
 		
 		ARGV.clear()
-		ARGV << "-w" << "workspace"
+		ARGV << "workspace"
 		ARGV << "-o" << ".."
 		GCover.new()
 		parent = Pathname.new(Dir.getwd+"/..").cleanpath.to_s
@@ -99,19 +101,30 @@ class TcOptions < Test::Unit::TestCase
 	def test_option_all
 
 		ARGV.clear()
-		ARGV << "-w" << "workspace"
+		ARGV << "workspace"
 		GCover.new()
 		assert_equal("workspace", $AppOptions[:workspace])
 		assert_equal("workspace/"+$AppOutput, $AppOptions[:output])
 		assert(!$AppOptions[:all])
 			
 		ARGV.clear()
-		ARGV << "-w" << "workspace"
+		ARGV << "workspace"
 		ARGV << "-a"
 		GCover.new()
 		assert_equal("workspace", $AppOptions[:workspace])
 		assert_equal("workspace/"+$AppOutput, $AppOptions[:output])
 		assert($AppOptions[:all])
+		
+	end
+	
+	def test_too_many_option
+		
+		ARGV.clear()
+		gcover = GCover.new()
+		ARGV << "workspace"
+		ARGV << "dummy"
+		assert_equal(nil, $AppOptions[:workspace])
+		assert_equal(nil, $AppOptions[:output])
 		
 	end
 end

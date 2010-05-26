@@ -34,7 +34,7 @@ end
 
 desc "complete rebuild, test, install & run example"
 task :all => [:clobber_package, :gem, :gem_test, :example_test, :gem_install] do
-    sh "gcover -w example"
+    sh "gcover example"
 end
 
 desc "complete clean"

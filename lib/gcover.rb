@@ -46,13 +46,11 @@ private
 	
 	def setOptions()
 		
+		$AppOptions.clear
+		
+		# parse explicit options
 		optparse = OptionParser.new do |opts|
-			opts.banner = $AppName+" options"
-			
-			$AppOptions[:workspace] = nil
-				opts.on("-w", "--workspace FOLDER", "Run code-coverage on FOLDER") do |folder|
-				$AppOptions[:workspace] = cleanPath(folder)
-			end
+			opts.banner = $AppName+" <workspace> [options ...]"
 			
 			$AppOptions[:output] = nil
 				opts.on("-o", "--output FOLDER", "Output code-coverage to FOLDER") do |folder|
@@ -69,8 +67,15 @@ private
 				exit(0)
 			end
 		end
-		
 		optparse.parse!
+		
+		# set implicit options
+		if 
+			$AppOptions[:workspace] == nil && 
+			ARGV.size == 1
+		then
+			$AppOptions[:workspace] = cleanPath(ARGV[0])
+		end
 		if 
 			$AppOptions[:workspace] != nil && 
 			$AppOptions[:output] == nil 
