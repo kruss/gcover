@@ -22,9 +22,15 @@ public:
 		CPPUNIT_ASSERT_EQUAL(9, pFoo->sum());
 	}
 
+	void testMul()
+	{
+		CPPUNIT_ASSERT_EQUAL(20, pFoo->mul());
+	}
+
 	CPPUNIT_TEST_SUITE(FooLibTest);
 
 		CPPUNIT_TEST(testSum);
+		CPPUNIT_TEST(testMul);
 
 	CPPUNIT_TEST_SUITE_END();
 
