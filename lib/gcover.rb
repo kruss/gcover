@@ -61,6 +61,11 @@ private
 				opts.on("-a", "--all", "All sources (include 'test' folders)") do
 				$AppOptions[:all] = true
 			end
+			
+			$AppOptions[:browser] = false
+				opts.on("-b", "--browser", "Open browser on output") do
+				$AppOptions[:browser] = true
+			end
 	
 			opts.on("-h", "--help", "Display this screen") do
 				puts opts
@@ -120,16 +125,23 @@ private
 
 	def runApplication()
 		
+		# run gcov
 		gcovRunner = GcovRunner.new($AppOptions[:workspace], $AppOptions[:output])
 		gcovRunner.fetchUnitTests
 		gcovRunner.runGcov
 		
+		# analyze gcov
 		gcovAnalyzer = GcovAnalyzer.new($AppOptions[:workspace], $AppOptions[:output])
 		gcovAnalyzer.analyzeUnitTests(gcovRunner)
 		gcovAnalyzer.createCodeCoverage
 	
+		# create output
 		htmlOutput = WorkspaceHtml.new($AppOptions[:workspace], $AppOptions[:output])
 		htmlOutput.createHtmlOutput(gcovAnalyzer)
+		Logger.log "html-output: "+htmlOutput.outputFile
+		if $AppOptions[:browser] then
+			HtmlUtil.openBrowser(htmlOutput.outputFile)
+		end
 
 	end
 end

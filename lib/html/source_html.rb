@@ -8,6 +8,10 @@ class SourceHtml
 		@testedSiblings = testedSiblings	# tested-source siblings to link in output
 	end
 	
+	def outputFile
+		return @testedSource.outputFolder+"/"+@testedSource.outputFileName
+	end
+	
 	def createHtmlOutput
 		
 		projectName = @testedSource.projectName
@@ -92,7 +96,6 @@ class SourceHtml
 		html << HtmlUtil.getFooter
 		
 		# output
-		outputFile = @testedSource.outputFolder+"/"+@testedSource.outputFileName
 		HtmlUtil.writeFile(outputFile, html)
 	end
 end

@@ -14,7 +14,11 @@ class WorkspaceHtml
 		@workspaceFolder = workspaceFolder		# workspace-folder path
 		@outputFolder = outputFolder			# output-folder path
 	end
-
+	
+	def outputFile
+		return @outputFolder+"/index.htm"
+	end
+	
 	def createHtmlOutput(gcovAnalyzer)
 	
 		Logger.info "creating output"
@@ -84,15 +88,11 @@ class WorkspaceHtml
 		# footer
 		html << HtmlUtil.getFooter
 		
-		outputFile = @outputFolder+"/index.htm"
-		HtmlUtil.writeFile(outputFile, html)
-		
 		# output
+		HtmlUtil.writeFile(outputFile, html)
 		testedProjects.each do |testedProject|
 			htmlOutput = ProjectHtml.new(testedProject)
 			htmlOutput.createHtmlOutput
 		end
-		
-		Logger.log outputFile
 	end
 end

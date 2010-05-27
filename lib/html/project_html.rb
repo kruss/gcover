@@ -11,6 +11,10 @@ class ProjectHtml
 		@testedProject = testedProject	# tested-project to generate html for
 	end
 	
+	def outputFile
+		return @testedProject.outputFolder+"/index.htm"
+	end
+	
 	def createHtmlOutput
 		
 		projectName = @testedProject.projectName
@@ -92,7 +96,6 @@ class ProjectHtml
 		html << HtmlUtil.getFooter
 		
 		# output
-		outputFile = @testedProject.outputFolder+"/index.htm"
 		HtmlUtil.writeFile(outputFile, html)
 		testedSources = @testedProject.testedSources
 		testedSources.each do |testedSource|

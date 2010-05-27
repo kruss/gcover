@@ -60,7 +60,6 @@ class HtmlUtil
 		str.gsub(/[^a-zA-Z0-9_\.\-]/n) {|s| sprintf('%%%02x', s[0]) }
 	end
 	
-	
 	def HtmlUtil.writeFile(filePath, html)
 	
 		file = File.new(filePath, "w")
@@ -72,4 +71,19 @@ class HtmlUtil
 		end
 	end
 
+	def HtmlUtil.openBrowser(filePath)
+		
+		realpath = Pathname.new(filePath).realpath
+		
+		os = Config::CONFIG['target_os'] 
+		if os.include?("win") then
+			sh "rundll32 url.dll,FileProtocolHandler \""+realpath+"\""
+		elsif os.include?("linux") then
+			sh "htmlview "+realpath
+		elsif os.include?("mac") then
+			sh "open "+realpath
+		else
+			raise "unsupported os: "+os
+		end
+	end
 end
