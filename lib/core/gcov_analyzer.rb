@@ -37,7 +37,7 @@ class GcovAnalyzer
 
 	def createCodeCoverage
 
-		Logger.info "creating coverage"
+		Logger.info "create coverage"
 		
 		@testedProjects.each do |testedProject|
 			testedProject.createOutputFolder
@@ -45,8 +45,13 @@ class GcovAnalyzer
 			testedProject.fetchUntestedSources
 			testedProject.createCodeCoverage
 			
-			Logger.log testedProject.projectName+": "+ProjectStatistic.new(testedProject).getCoverRatio.to_s+" %"
+			Logger.log testedProject.projectName+": "+ProjectStatistic.new(testedProject.testedSources).getCoverRatio.to_s+" %"
 		end
+		
+		if @testedProjects.size > 0 then
+			Logger.skipLine
+		end
+		Logger.log "workspace: "+WorkspaceStatistic.new(self.testedProjects).getCoverRatio.to_s+" %"
 	end
 		
 private

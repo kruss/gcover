@@ -38,26 +38,25 @@ class TcStatistic < Test::Unit::TestCase
 	
 		source = TestedSource.new("src-1", nil, nil, nil)
 		
-		statistic = SourceStatistic.new(source)
-		verifyStatistic(statistic, 0, 0, 0, 0, 0.00)
+		verifyStatistic(SourceStatistic.new(source.testedLines), 0, 0, 0, 0, 0.00)
 		
 		source.testedLines << getSourceLine()
-		verifyStatistic(statistic, 1, 0, 0, 0, 0.00)
+		verifyStatistic(SourceStatistic.new(source.testedLines), 1, 0, 0, 0, 0.00)
 		
 		source.testedLines << getIgnoredSourceLine()
-		verifyStatistic(statistic, 2, 1, 0, 0, 0.00)
+		verifyStatistic(SourceStatistic.new(source.testedLines), 2, 1, 0, 0, 0.00)
 		
 		source.testedLines << getExecutedSourceLine()
-		verifyStatistic(statistic, 3, 1, 1, 0, 100.00)
+		verifyStatistic(SourceStatistic.new(source.testedLines), 3, 1, 1, 0, 100.00)
 		
 		source.testedLines << getMissedSourceLine()
-		verifyStatistic(statistic, 4, 1, 1, 1, 50.00)
+		verifyStatistic(SourceStatistic.new(source.testedLines), 4, 1, 1, 1, 50.00)
 		
 		source.testedLines << getMissedSourceLine()
-		verifyStatistic(statistic, 5, 1, 1, 2, 33.33)
+		verifyStatistic(SourceStatistic.new(source.testedLines), 5, 1, 1, 2, 33.33)
 		
 		source.testedLines << getIgnoredSourceLine()
-		verifyStatistic(statistic, 6, 2, 1, 2, 33.33)
+		verifyStatistic(SourceStatistic.new(source.testedLines), 6, 2, 1, 2, 33.33)
 	
 	end
 	
@@ -70,26 +69,25 @@ class TcStatistic < Test::Unit::TestCase
 		project.testedSources << source1
 		project.testedSources << source2
 		
-		statistic = ProjectStatistic.new(project)
-		verifyStatistic(statistic, 0, 0, 0, 0, 0.00)
+		verifyStatistic(ProjectStatistic.new(project.testedSources), 0, 0, 0, 0, 0.00)
 		
 		source1.testedLines << getSourceLine()
-		verifyStatistic(statistic, 1, 0, 0, 0, 0.00)
+		verifyStatistic(ProjectStatistic.new(project.testedSources), 1, 0, 0, 0, 0.00)
 		
 		source2.testedLines << getIgnoredSourceLine()
-		verifyStatistic(statistic, 2, 1, 0, 0, 0.00)
+		verifyStatistic(ProjectStatistic.new(project.testedSources), 2, 1, 0, 0, 0.00)
 		
 		source1.testedLines << getExecutedSourceLine()
-		verifyStatistic(statistic, 3, 1, 1, 0, 100.00)
+		verifyStatistic(ProjectStatistic.new(project.testedSources), 3, 1, 1, 0, 100.00)
 		
 		source2.testedLines << getMissedSourceLine()
-		verifyStatistic(statistic, 4, 1, 1, 1, 50.00)
+		verifyStatistic(ProjectStatistic.new(project.testedSources), 4, 1, 1, 1, 50.00)
 		
 		source1.testedLines << getMissedSourceLine()
-		verifyStatistic(statistic, 5, 1, 1, 2, 33.33)
+		verifyStatistic(ProjectStatistic.new(project.testedSources), 5, 1, 1, 2, 33.33)
 		
 		source2.testedLines << getIgnoredSourceLine()
-		verifyStatistic(statistic, 6, 2, 1, 2, 33.33)
+		verifyStatistic(ProjectStatistic.new(project.testedSources), 6, 2, 1, 2, 33.33)
 	end
 	
 	def test_workspace_statistic
@@ -111,26 +109,25 @@ class TcStatistic < Test::Unit::TestCase
 		analyzer.testedProjects << project1
 		analyzer.testedProjects << project2
 		
-		statistic = WorkspaceStatistic.new(analyzer)
-		verifyStatistic(statistic, 0, 0, 0, 0, 0.00)
+		verifyStatistic(WorkspaceStatistic.new(analyzer.testedProjects), 0, 0, 0, 0, 0.00)
 		
 		source11.testedLines << getSourceLine()
-		verifyStatistic(statistic, 1, 0, 0, 0, 0.00)
+		verifyStatistic(WorkspaceStatistic.new(analyzer.testedProjects), 1, 0, 0, 0, 0.00)
 		
 		source12.testedLines << getIgnoredSourceLine()
-		verifyStatistic(statistic, 2, 1, 0, 0, 0.00)
+		verifyStatistic(WorkspaceStatistic.new(analyzer.testedProjects), 2, 1, 0, 0, 0.00)
 		
 		source21.testedLines << getExecutedSourceLine()
-		verifyStatistic(statistic, 3, 1, 1, 0, 100.00)
+		verifyStatistic(WorkspaceStatistic.new(analyzer.testedProjects), 3, 1, 1, 0, 100.00)
 		
 		source22.testedLines << getMissedSourceLine()
-		verifyStatistic(statistic, 4, 1, 1, 1, 50.00)
+		verifyStatistic(WorkspaceStatistic.new(analyzer.testedProjects), 4, 1, 1, 1, 50.00)
 		
 		source11.testedLines << getMissedSourceLine()
-		verifyStatistic(statistic, 5, 1, 1, 2, 33.33)
+		verifyStatistic(WorkspaceStatistic.new(analyzer.testedProjects), 5, 1, 1, 2, 33.33)
 		
 		source22.testedLines << getIgnoredSourceLine()
-		verifyStatistic(statistic, 6, 2, 1, 2, 33.33)
+		verifyStatistic(WorkspaceStatistic.new(analyzer.testedProjects), 6, 2, 1, 2, 33.33)
 	end
 	
 private

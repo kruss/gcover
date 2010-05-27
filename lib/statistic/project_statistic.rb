@@ -4,9 +4,9 @@ require "statistic/source_statistic"
 
 class ProjectStatistic
 
-	def initialize(testedProject)
+	def initialize(testedSources)
 	
-		@testedSources = testedProject.testedSources		# sources with code-coverage
+		@testedSources = testedSources			# sources with code-coverage
 	end
 	
 	def getCoverRatio
@@ -18,7 +18,7 @@ class ProjectStatistic
 	def getTotalLines
 		sum = 0
 		@testedSources.each do |testedSource|
-			sum = sum + SourceStatistic.new(testedSource).getTotalLines
+			sum = sum + SourceStatistic.new(testedSource.testedLines).getTotalLines
 		end
 		return sum
 	end
@@ -26,7 +26,7 @@ class ProjectStatistic
 	def getIgnoredLines
 		sum = 0
 		@testedSources.each do |testedSource|
-			sum = sum + SourceStatistic.new(testedSource).getIgnoredLines
+			sum = sum + SourceStatistic.new(testedSource.testedLines).getIgnoredLines
 		end
 		return sum
 	end
@@ -34,7 +34,7 @@ class ProjectStatistic
 	def getExecutedLines
 		sum = 0
 		@testedSources.each do |testedSource|
-			sum = sum + SourceStatistic.new(testedSource).getExecutedLines
+			sum = sum + SourceStatistic.new(testedSource.testedLines).getExecutedLines
 		end
 		return sum
 	end
@@ -42,7 +42,7 @@ class ProjectStatistic
 	def getMissedLines
 		sum = 0
 		@testedSources.each do |testedSource|
-			sum = sum + SourceStatistic.new(testedSource).getMissedLines
+			sum = sum + SourceStatistic.new(testedSource.testedLines).getMissedLines
 		end
 		return sum
 	end

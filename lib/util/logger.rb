@@ -32,6 +32,17 @@ class Logger
 		log = "~ "+text+"\n"
 		writeFile(log)
 	end
+	
+	def Logger.error(text)
+		log = "! "+text+"\n"
+		writeFile(log)
+	end
+	
+	def Logger.skipLine
+		log = "\n"
+		writeConsole(log)
+		writeFile(log)
+	end
 
 private
 

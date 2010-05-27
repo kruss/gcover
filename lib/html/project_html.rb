@@ -4,6 +4,7 @@ require "statistic/project_statistic"
 require "statistic/source_statistic"
 require "html/source_html"
 require "util/html_util"
+require "util/file_util"
 
 class ProjectHtml
 
@@ -18,7 +19,7 @@ class ProjectHtml
 	def createHtmlOutput
 		
 		projectName = @testedProject.projectName
-		projectStatistic = ProjectStatistic.new(@testedProject)
+		projectStatistic = ProjectStatistic.new(@testedProject.testedSources)
 		
 		# header
 		html = HtmlUtil.getHeader($AppName)
@@ -48,7 +49,7 @@ class ProjectHtml
 				
 				sourceFileName = testedSource.sourceFileName
 				outputFileName = testedSource.outputFileName
-				sourceStatistic = SourceStatistic.new(testedSource)
+				sourceStatistic = SourceStatistic.new(testedSource.testedLines)
 
 				html << "<tr>"
 				html << "<td>"+idx.to_s+".) <a href='html/"+HtmlUtil.urlencode(outputFileName)+"'>"+sourceFileName+"</a></td>"
@@ -96,7 +97,7 @@ class ProjectHtml
 		html << HtmlUtil.getFooter
 		
 		# output
-		HtmlUtil.writeFile(outputFile, html)
+		FileUtil.writeFile(outputFile, html)
 		testedSources = @testedProject.testedSources
 		testedSources.each do |testedSource|
 			testedSiblings = getTestedSiblings(testedSources, testedSource)

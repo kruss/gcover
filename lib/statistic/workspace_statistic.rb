@@ -4,9 +4,9 @@ require "statistic/project_statistic"
 
 class WorkspaceStatistic
 
-	def initialize(gcovAnalyzer)
+	def initialize(testedProjects)
 	
-		@testedProjects = gcovAnalyzer.testedProjects 			# projects with code-coverage
+		@testedProjects = testedProjects 		# projects with code-coverage
 	end
 	
 	def getCoverRatio
@@ -20,7 +20,7 @@ class WorkspaceStatistic
 	
 		sum = 0
 		@testedProjects.each do |testedProject|
-			sum = sum + ProjectStatistic.new(testedProject).getTotalLines
+			sum = sum + ProjectStatistic.new(testedProject.testedSources).getTotalLines
 		end
 		return sum
 	end
@@ -29,7 +29,7 @@ class WorkspaceStatistic
 	
 		sum = 0
 		@testedProjects.each do |testedProject|
-			sum = sum + ProjectStatistic.new(testedProject).getIgnoredLines
+			sum = sum + ProjectStatistic.new(testedProject.testedSources).getIgnoredLines
 		end
 		return sum
 	end
@@ -38,7 +38,7 @@ class WorkspaceStatistic
 	
 		sum = 0
 		@testedProjects.each do |testedProject|
-			sum = sum + ProjectStatistic.new(testedProject).getExecutedLines
+			sum = sum + ProjectStatistic.new(testedProject.testedSources).getExecutedLines
 		end
 		return sum
 	end
@@ -47,7 +47,7 @@ class WorkspaceStatistic
 	
 		sum = 0
 		@testedProjects.each do |testedProject|
-			sum = sum + ProjectStatistic.new(testedProject).getMissedLines
+			sum = sum + ProjectStatistic.new(testedProject.testedSources).getMissedLines
 		end
 		return sum
 	end

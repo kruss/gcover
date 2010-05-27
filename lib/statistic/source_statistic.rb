@@ -3,9 +3,9 @@ require "data/tested_line"
 
 class SourceStatistic
 
-	def initialize(testedSource)
+	def initialize(testedLines)
 		
-		@testedLines = testedSource.testedLines				# tested lines of source
+		@testedLines = testedLines				# lines with code-coverage
 	end
 	
 	def getCoverRatio

@@ -1,5 +1,6 @@
 require "data/tested_source"
 require "util/html_util"
+require "util/file_util"
 
 class SourceHtml
 
@@ -16,7 +17,7 @@ class SourceHtml
 		
 		projectName = @testedSource.projectName
 		sourceFileName = @testedSource.sourceFileName
-		sourceStatistic = SourceStatistic.new(@testedSource)
+		sourceStatistic = SourceStatistic.new(@testedSource.testedLines)
 		
 		# header
 		html = HtmlUtil.getHeader($AppName)
@@ -96,6 +97,6 @@ class SourceHtml
 		html << HtmlUtil.getFooter
 		
 		# output
-		HtmlUtil.writeFile(outputFile, html)
+		FileUtil.writeFile(outputFile, html)
 	end
 end

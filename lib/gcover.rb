@@ -3,7 +3,7 @@
 require "optparse"
 require "core/gcov_runner"
 require "core/gcov_analyzer"
-require "html/workspace_html"
+require "core/gcov_output"
 require "util/logger"
 
 $AppName = "gcover"
@@ -30,10 +30,14 @@ class GCover
 			Logger.log "workspace-folder: "+$AppOptions[:workspace]
 			Logger.log "output-folder: "+$AppOptions[:output]
 			if $AppOptions[:all] then 
-				Logger.log "including: all sources"
+				Logger.log "include: all sources"
 			end
 			
 			runApplication()
+			
+			if $AppOptions[:xml] then 
+				deleteOutputFolder()
+			end
 			exit(0)
 		else
 		
@@ -60,6 +64,11 @@ private
 			$AppOptions[:all] = false
 				opts.on("-a", "--all", "All sources (include 'test' folders)") do
 				$AppOptions[:all] = true
+			end
+			
+			$AppOptions[:xml] = false
+				opts.on("-x", "--xml", "Dump results as XML only") do
+				$AppOptions[:xml] = true
 			end
 			
 			$AppOptions[:browser] = false
@@ -114,13 +123,17 @@ private
 		end
 	end
 	
-	def createOutputFolder
+	def deleteOutputFolder
 	
 		if FileTest.directory?($AppOptions[:output]) then 
 			FileUtils.rm_rf($AppOptions[:output])
 		end
+	end
+	
+	def createOutputFolder
+
+		deleteOutputFolder
 		FileUtils.mkdir_p($AppOptions[:output])
-		
 	end
 
 	def runApplication()
@@ -136,12 +149,8 @@ private
 		gcovAnalyzer.createCodeCoverage
 	
 		# create output
-		htmlOutput = WorkspaceHtml.new($AppOptions[:workspace], $AppOptions[:output])
-		htmlOutput.createHtmlOutput(gcovAnalyzer)
-		Logger.log "html-output: "+htmlOutput.outputFile
-		if $AppOptions[:browser] then
-			HtmlUtil.openBrowser(htmlOutput.outputFile)
-		end
+		gcovOutput = GcovOutput.new($AppOptions[:workspace], $AppOptions[:output])
+		gcovOutput.createOutput(gcovAnalyzer)
 
 	end
 end

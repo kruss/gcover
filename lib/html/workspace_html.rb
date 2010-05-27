@@ -6,6 +6,7 @@ require "statistic/workspace_statistic"
 require "statistic/project_statistic"
 require "html/project_html"
 require "util/html_util"
+require "util/file_util"
 require "util/logger"
 
 class WorkspaceHtml
@@ -19,13 +20,9 @@ class WorkspaceHtml
 		return @outputFolder+"/index.htm"
 	end
 	
-	def createHtmlOutput(gcovAnalyzer)
-	
-		Logger.info "creating output"
+	def createHtmlOutput(testedProjects, untestedProjects)
 		
-		workspaceStatistic = WorkspaceStatistic.new(gcovAnalyzer)
-		testedProjects = gcovAnalyzer.testedProjects.sort_by{|item| item.projectName}
-		untestedProjects = gcovAnalyzer.untestedProjects.sort_by{|item| item}
+		workspaceStatistic = WorkspaceStatistic.new(testedProjects)
 		
 		# header
 		html = HtmlUtil.getHeader($AppName)
@@ -42,6 +39,7 @@ class WorkspaceHtml
 		
 		# tested projects
 		html << "<h2>Tested Projects</h2> \n"
+		testedProjects = testedProjects.sort_by{|item| item.projectName}
 		if testedProjects.size() > 0 then
 			html << "<table cellspacing=0 cellpadding=5 border=1> \n"
 			html << "<tr>"
@@ -53,7 +51,7 @@ class WorkspaceHtml
 				idx = idx + 1
 				
 				projectName = testedProject.projectName
-				projectStatistic = ProjectStatistic.new(testedProject)
+				projectStatistic = ProjectStatistic.new(testedProject.testedSources)
 				
 				html << "<tr>"
 				if testedProject.internGcov then
@@ -76,6 +74,7 @@ class WorkspaceHtml
 		end
 		
 		# untested projects
+		untestedProjects = untestedProjects.sort_by{|item| item}
 		if untestedProjects.size() > 0 then
 			html << "<h2>Untested Projects</h2> \n"
 			html << "<ol> \n"
@@ -89,7 +88,7 @@ class WorkspaceHtml
 		html << HtmlUtil.getFooter
 		
 		# output
-		HtmlUtil.writeFile(outputFile, html)
+		FileUtil.writeFile(outputFile, html)
 		testedProjects.each do |testedProject|
 			htmlOutput = ProjectHtml.new(testedProject)
 			htmlOutput.createHtmlOutput
