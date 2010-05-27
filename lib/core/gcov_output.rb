@@ -24,8 +24,7 @@ class GcovOutput
 		end
 		
 		if outputFile != nil && $AppOptions[:browser] then
-		
-			Logger.info "open browser"
+			Logger.log "open browser"
 			begin 
 				FileUtil.openBrowser(outputFile)
 			rescue 

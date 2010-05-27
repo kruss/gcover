@@ -35,6 +35,7 @@ class Logger
 	
 	def Logger.error(text)
 		log = "! "+text+"\n"
+		writeConsole(log)
 		writeFile(log)
 	end
 	
