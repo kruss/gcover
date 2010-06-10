@@ -91,7 +91,7 @@ desc "run example unit-test"
 task :example => [:example_build] do
 
     Dir.chdir("example/FooLib/UnitTest") do
-		run_cmd("FooLib.exe")
+		run_cmd("./FooLib.exe")
     end   
 end
 
