@@ -17,80 +17,87 @@ Rake::GemPackageTask.new(spec) {|pkg|}
 
 desc "install gem"
 task :gem_install do
-    sh "gem install pkg/gcover-*.gem"
+    run_cmd("gem install pkg/gcover-*.gem")
 end
 
 desc "uninstall gem"
 task :gem_uninstall do
-    sh "gem uninstall gcover"
+    run_cmd("gem uninstall gcover")
 end
 
 desc "run gem tests"
 task :gem_test do
-    cd "tests" do
-		sh "ruby ts_gcover.rb"
+    Dir.chdir("tests") do
+		run_cmd("ruby ts_gcover.rb")
     end
 end
 
-desc "complete rebuild, test, install & run example"
-task :all => [:clobber_package, :gem, :gem_test, :example_test, :gem_install] do
-    sh "gcover example"
+desc "complete rebuild, test, install & example"
+task :all => [:clobber_package, :gem, :gem_test, :example, :gem_install] do
+    system("gcover example")
 end
 
 desc "complete clean"
 task :all_clean => [:clobber_package, :example_clean] do
 
-	FileUtils.rm_rf("example/.gcover") 		
 	files = FileList.new("example/**/*.gcno")
 	files.include("example/**/*.gcda")
 	files.include("example/**/*.gcov")
 	FileUtils.rm(files)
+	FileUtils.rm_rf("example/.gcover") 		
 end
 
 desc "clean example workspace"
 task :example_clean do
 
-    cd "example/Logger/Debug" do
-		sh "make clean"
+    Dir.chdir("example/Logger/Debug") do
+		run_cmd("make clean")
     end
-    cd "example/Logger/UnitTestLib" do
-		sh "make clean"
+    Dir.chdir("example/Logger/UnitTestLib") do
+		run_cmd("make clean")
     end
-    cd "example/FooLib/Debug" do
-		sh "make clean"
+    Dir.chdir("example/FooLib/Debug") do
+		run_cmd("make clean")
     end
-    cd "example/FooLib/UnitTest" do
-		sh "make clean"
+    Dir.chdir("example/FooLib/UnitTest") do
+		run_cmd("make clean")
     end   
-    cd "example/Dummy/Debug" do
-		sh "make clean"
+    Dir.chdir("example/Dummy/Debug") do
+		run_cmd("make clean")
     end
 end
 
 desc "build example workspace"
 task :example_build => [:example_clean] do
 
-    cd "example/Logger/Debug" do
-		sh "make all"
+    Dir.chdir("example/Logger/Debug") do
+		run_cmd("make all")
     end
-    cd "example/Logger/UnitTestLib" do
-		sh "make all"
+    Dir.chdir("example/Logger/UnitTestLib") do
+		run_cmd("make all")
     end
-    cd "example/FooLib/Debug" do
-		sh "make all"
+    Dir.chdir("example/FooLib/Debug") do
+		run_cmd("make all")
     end
-    cd "example/FooLib/UnitTest" do
-		sh "make all"
+    Dir.chdir("example/FooLib/UnitTest") do
+		run_cmd("make all")
     end   
-    cd "example/Dummy/Debug" do
-		sh "make all"
+    Dir.chdir("example/Dummy/Debug") do
+		run_cmd("make all")
     end
 end
 
 desc "run example unit-test"
-task :example_test => [:example_build] do
+task :example => [:example_build] do
 
-    cd "example/FooLib/UnitTest" do
-		sh "./FooLib.exe"
+    Dir.chdir("example/FooLib/UnitTest") do
+		run_cmd("FooLib.exe")
     end   
+end
+
+def run_cmd(cmd)
+    if !system(cmd) then
+    	puts "unable to run: "+cmd
+    	exit(-1)
+    end
 end
