@@ -5,8 +5,8 @@ GEM_VERSION = "0.1.0"
 
 ### ALL ###################################################
 
-desc "Complete rebuild, test, install & example"
-task :all => [:clobber_package, :make_example_gcover, :gem_install] do
+desc "Complete rebuild, test, install & makefile example"
+task :all => [:clobber_package, :gem_install, :make_example_gcover] do
 end
 
 desc "Complete clean"
