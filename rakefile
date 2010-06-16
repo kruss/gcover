@@ -139,11 +139,11 @@ end
 desc "Run cxxproject example"
 task :cxx_example_run => [:cxx_example_build] do
 
-    Dir.chdir("example/Dummy/build") do
-		run_cmd("./Dummy.exe")
-    end   
     Dir.chdir("example/FooLib/build") do
 		run_cmd("./FooLib.exe")
+    end   
+    Dir.chdir("example/Dummy/build") do
+		run_cmd("./Dummy.exe")
     end   
 end
 
