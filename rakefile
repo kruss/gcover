@@ -149,7 +149,7 @@ end
 
 desc "Gcover cxxproject example"
 task :cxx_example_gcover => [:cxx_example_run] do
-    run_cmd("gcover example")
+    run_cmd("gcover example -cxx")
 end
 
 ### TOOLS #################################################
