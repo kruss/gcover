@@ -1,0 +1,11 @@
+require 'cxxproject'
+
+CxxProject2Rake.new(
+	Dir.glob('../**/*test.rb'), 
+	OsxCompiler.new('build').set_flags(
+		['DCPPUNIT_MAIN=main', 'fprofile-arcs', 'ftest-coverage']
+	).set_linker_flags(
+		['fprofile-arcs']
+	),
+	'../'
+)

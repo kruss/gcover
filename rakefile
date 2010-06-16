@@ -1,8 +1,23 @@
 require 'rake/gempackagetask'
 
+GEM_NAME 	= "gcover"
+GEM_VERSION = "0.1.0"
+
+### ALL ###################################################
+
+desc "Complete rebuild, test, install & example"
+task :all => [:clobber_package, :make_example_gcover, :gem_install] do
+end
+
+desc "Complete clean"
+task :all_clean => [:clobber_package, :make_example_clean] do		
+end
+
+### GEM ###################################################
+
 spec = Gem::Specification.new do |s|
-	s.name = "gcover"
-	s.version = "0.1.0"
+	s.name = GEM_NAME
+	s.version = GEM_VERSION
 	s.author = "Kevin russ"
 	s.email = "kruss@lear.com"
 	s.platform = Gem::Platform::RUBY
@@ -11,45 +26,39 @@ spec = Gem::Specification.new do |s|
 	s.require_path = "lib"
 	s.has_rdoc = true
 	s.extra_rdoc_files = ["README"]
-	s.executables = ["gcover"]
+	s.executables = [GEM_NAME]
 end
 Rake::GemPackageTask.new(spec) {|pkg|}
+task :gem => [:gem_test] 
 
-desc "install gem"
-task :gem_install do
-    run_cmd("gem install pkg/gcover-*.gem")
+desc "Install the gem"
+task :gem_install => [:gem] do
+    run_cmd("gem install pkg/#{spec.name}-#{spec.version}.gem")
 end
 
-desc "uninstall gem"
+desc "Uninstall the gem"
 task :gem_uninstall do
-    run_cmd("gem uninstall gcover")
+    run_cmd("gem uninstall #{spec.name}")
 end
 
-desc "run gem tests"
+desc "Test the gem"
 task :gem_test do
     Dir.chdir("tests") do
 		run_cmd("ruby ts_gcover.rb")
     end
 end
 
-desc "complete rebuild, test, install & example"
-task :all => [:clobber_package, :gem, :gem_test, :example, :gem_install] do
-    system("gcover example")
-end
+### MAKEFILE EXAMPLE ######################################
 
-desc "complete clean"
-task :all_clean => [:clobber_package, :example_clean] do
+desc "Clean makefile example"
+task :make_example_clean do
 
 	files = FileList.new("example/**/*.gcno")
 	files.include("example/**/*.gcda")
 	files.include("example/**/*.gcov")
 	FileUtils.rm(files)
-	FileUtils.rm_rf("example/.gcover") 		
-end
-
-desc "clean example workspace"
-task :example_clean do
-
+	FileUtils.rm_rf("example/.gcover") 
+	
     Dir.chdir("example/Logger/Debug") do
 		run_cmd("make clean")
     end
@@ -67,8 +76,8 @@ task :example_clean do
     end
 end
 
-desc "build example workspace"
-task :example_build => [:example_clean] do
+desc "Build makefile example"
+task :make_example_build => [:make_example_clean] do
 
     Dir.chdir("example/Logger/Debug") do
 		run_cmd("make all")
@@ -87,13 +96,63 @@ task :example_build => [:example_clean] do
     end
 end
 
-desc "run example unit-test"
-task :example => [:example_build] do
+desc "Run makefile example"
+task :make_example_run => [:make_example_build] do
 
     Dir.chdir("example/FooLib/UnitTest") do
 		run_cmd("./FooLib.exe")
     end   
+    Dir.chdir("example/Dummy/Debug") do
+		run_cmd("./Dummy.exe")
+    end  
 end
+
+desc "Gcover makefile example"
+task :make_example_gcover => [:make_example_run] do
+    run_cmd("gcover example")
+end
+
+### CXXPROJECT EXAMPLE ####################################
+
+desc "Clean cxxproject example"
+task :cxx_example_clean do
+
+    Dir.chdir("example/Dummy") do
+		run_cmd("rake clobber")
+    end
+    Dir.chdir("example/FooLib") do
+		run_cmd("rake clobber")
+    end
+end
+
+desc "Build cxxproject example"
+task :cxx_example_build => [:cxx_example_clean] do
+
+    Dir.chdir("example/FooLib") do
+		run_cmd("rake FooLib")
+    end
+    Dir.chdir("example/Dummy") do
+		run_cmd("rake Dummy")
+    end
+end
+
+desc "Run cxxproject example"
+task :cxx_example_run => [:cxx_example_build] do
+
+    Dir.chdir("example/Dummy/build") do
+		run_cmd("./Dummy.exe")
+    end   
+    Dir.chdir("example/FooLib/build") do
+		run_cmd("./FooLib.exe")
+    end   
+end
+
+desc "Gcover cxxproject example"
+task :cxx_example_gcover => [:cxx_example_run] do
+    run_cmd("gcover example")
+end
+
+### TOOLS #################################################
 
 def run_cmd(cmd)
     if !system(cmd) then
@@ -101,3 +160,5 @@ def run_cmd(cmd)
     	exit(-1)
     end
 end
+
+###########################################################

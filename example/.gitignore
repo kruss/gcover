@@ -9,3 +9,5 @@
 *.gcno
 *.gcda
 *.gcov
+
+*/build
