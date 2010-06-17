@@ -30,6 +30,7 @@
 <option id="gnu.cpp.compiler.option.include.paths.680051710" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="&quot;../../Logger/include&quot;"/>
 <listOptionValue builtIn="false" value="&quot;../../FooLib/include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;../../FooLib2/include&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin.148383552" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin"/>
 </tool>
@@ -43,10 +44,12 @@
 <option id="gnu.cpp.link.option.paths.2024386089" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
 <listOptionValue builtIn="false" value="&quot;../../Logger/Debug&quot;"/>
 <listOptionValue builtIn="false" value="&quot;../../FooLib/Debug&quot;"/>
+<listOptionValue builtIn="false" value="&quot;../../FooLib2/Debug&quot;"/>
 </option>
 <option id="gnu.cpp.link.option.libs.1331762946" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
 <listOptionValue builtIn="false" value="Logger"/>
 <listOptionValue builtIn="false" value="FooLib"/>
+<listOptionValue builtIn="false" value="FooLib2"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.686245980" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>

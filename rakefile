@@ -71,6 +71,12 @@ task :make_example_clean do
     Dir.chdir("example/FooLib/UnitTest") do
 		run_cmd("make clean")
     end   
+    Dir.chdir("example/FooLib2/Debug") do
+		run_cmd("make clean")
+    end
+    Dir.chdir("example/FooLib2/UnitTest") do
+		run_cmd("make clean")
+    end  
     Dir.chdir("example/Dummy/Debug") do
 		run_cmd("make clean")
     end
@@ -90,7 +96,13 @@ task :make_example_build => [:make_example_clean] do
     end
     Dir.chdir("example/FooLib/UnitTest") do
 		run_cmd("make all")
-    end   
+    end
+    Dir.chdir("example/FooLib2/Debug") do
+		run_cmd("make all")
+    end
+    Dir.chdir("example/FooLib2/UnitTest") do
+		run_cmd("make all")
+    end  
     Dir.chdir("example/Dummy/Debug") do
 		run_cmd("make all")
     end
@@ -101,6 +113,9 @@ task :make_example_run => [:make_example_build] do
 
     Dir.chdir("example/FooLib/UnitTest") do
 		run_cmd("./FooLib.exe")
+    end
+    Dir.chdir("example/FooLib2/UnitTest") do
+		run_cmd("./FooLib2.exe")
     end   
     Dir.chdir("example/Dummy/Debug") do
 		run_cmd("./Dummy.exe")
@@ -123,6 +138,9 @@ task :cxx_example_clean do
     Dir.chdir("example/FooLib") do
 		run_cmd("rake clobber")
     end
+    Dir.chdir("example/FooLib2") do
+		run_cmd("rake clobber")
+    end
 end
 
 desc "Build cxxproject example"
@@ -130,6 +148,9 @@ task :cxx_example_build => [:cxx_example_clean] do
 
     Dir.chdir("example/FooLib") do
 		run_cmd("rake FooLib")
+    end
+    Dir.chdir("example/FooLib2") do
+		run_cmd("rake FooLib2")
     end
     Dir.chdir("example/Dummy") do
 		run_cmd("rake Dummy")
@@ -141,7 +162,10 @@ task :cxx_example_run => [:cxx_example_build] do
 
     Dir.chdir("example/FooLib/build") do
 		run_cmd("./FooLib.exe")
-    end   
+    end
+    Dir.chdir("example/FooLib2/build") do
+		run_cmd("./FooLib2.exe")
+    end  
     Dir.chdir("example/Dummy/build") do
 		run_cmd("./Dummy.exe")
     end   

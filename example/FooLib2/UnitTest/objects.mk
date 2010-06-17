@@ -4,4 +4,4 @@
 
 USER_OBJS :=
 
-LIBS := -lLogger -lFooLib -lFooLib2
+LIBS := -lcppunit -lLogger

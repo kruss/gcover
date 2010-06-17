@@ -38,19 +38,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: Dummy.exe
+all: libFooLib2.a
 
 # Tool invocations
-Dummy.exe: $(OBJS) $(USER_OBJS)
+libFooLib2.a: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
-	@echo 'Invoking: Cygwin C++ Linker'
-	g++ -L"../../Logger/Debug" -L"../../FooLib/Debug" -L"../../FooLib2/Debug" -o"Dummy.exe" $(OBJS) $(USER_OBJS) $(LIBS)
+	@echo 'Invoking: GCC Archiver'
+	ar -r "libFooLib2.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) Dummy.exe
+	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(CC_DEPS)$(ARCHIVES)$(CPP_DEPS)$(CXX_DEPS)$(C_UPPER_DEPS) libFooLib2.a
 	-@echo ' '
 
 .PHONY: all clean dependents

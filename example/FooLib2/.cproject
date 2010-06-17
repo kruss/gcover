@@ -7,8 +7,8 @@
 <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 <externalSettings>
 <externalSetting>
-<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/Logger"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/Logger/Debug"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/DummyLib"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/DummyLib/Debug"/>
 </externalSetting>
 </externalSettings>
 <extensions>
@@ -19,18 +19,18 @@
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="a" artifactName="Logger" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269" name="Debug" parent="cdt.managedbuild.config.gnu.cygwin.exe.debug">
+<configuration artifactExtension="a" artifactName="FooLib2" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269" name="Debug" parent="cdt.managedbuild.config.gnu.cygwin.exe.debug">
 <folderInfo id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug.2129688437" name="Cygwin GCC" superClass="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug">
 <targetPlatform id="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug.211690406" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug"/>
-<builder buildPath="${workspace_loc:/Logger/Debug}" id="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug.1411406303" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug">
+<builder buildPath="${workspace_loc:/DummyLib/Debug}" id="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug.1411406303" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug">
 <outputEntries>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
 </outputEntries>
 </builder>
 <tool id="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug.233989838" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug">
 <option id="gnu.both.asm.option.include.paths.1066621077" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="C:/Projekte/Test/Logger/include"/>
+<listOptionValue builtIn="false" value="C:/Projekte/Test/DummyLib/include"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.assembler.input.396236633" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
@@ -40,6 +40,7 @@
 <option id="gnu.cpp.compiler.cygwin.exe.debug.option.debugging.level.618800617" name="Debug Level" superClass="gnu.cpp.compiler.cygwin.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 <option id="gnu.cpp.compiler.option.include.paths.705959862" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="&quot;../include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;../../Logger/include&quot;"/>
 </option>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin.1936220445" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin"/>
 </tool>
@@ -651,13 +652,13 @@
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cconfiguration>
-<cconfiguration id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269.1093125854">
-<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269.1093125854" moduleId="org.eclipse.cdt.core.settings" name="UnitTestLib">
+<cconfiguration id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269.1616182353">
+<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269.1616182353" moduleId="org.eclipse.cdt.core.settings" name="UnitTest">
 <externalSettings>
 <externalSetting>
-<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/Logger"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/Logger/Debug"/>
-<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/Logger/UnitTestLib"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="includePath" name="/DummyLib"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/DummyLib/UnitTest"/>
+<entry flags="VALUE_WORKSPACE_PATH" kind="libraryPath" name="/DummyLib/Debug"/>
 </externalSetting>
 </externalSettings>
 <extensions>
@@ -665,43 +666,49 @@
 <extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 <extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 <extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 </extensions>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-<configuration artifactExtension="a" artifactName="Logger" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269.1093125854" name="UnitTestLib" parent="cdt.managedbuild.config.gnu.cygwin.exe.debug">
-<folderInfo id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269.1093125854." name="/" resourcePath="">
-<toolChain id="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug.1759777847" name="Cygwin GCC" superClass="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug">
-<targetPlatform id="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug.222118025" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug"/>
-<builder buildPath="${workspace_loc:/Logger/Debug}" id="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug.1224529888" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug">
-<outputEntries>
-<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="Debug"/>
-</outputEntries>
-</builder>
-<tool id="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug.1399583761" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug">
-<option id="gnu.both.asm.option.include.paths.1297360095" name="Include paths (-I)" superClass="gnu.both.asm.option.include.paths" valueType="includePath">
-<listOptionValue builtIn="false" value="C:/Projekte/Test/Logger/include"/>
-</option>
-<inputType id="cdt.managedbuild.tool.gnu.assembler.input.492779626" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+<configuration artifactName="FooLib2" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269.1616182353" name="UnitTest" parent="cdt.managedbuild.config.gnu.cygwin.exe.debug">
+<folderInfo id="cdt.managedbuild.config.gnu.cygwin.exe.debug.1031385269.1616182353." name="/" resourcePath="">
+<toolChain id="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug.477269547" name="Cygwin GCC" superClass="cdt.managedbuild.toolchain.gnu.cygwin.exe.debug">
+<targetPlatform id="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug.2068870936" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.cygwin.exe.debug"/>
+<builder buildPath="${workspace_loc:/DummyLib/Debug}" id="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug.150683783" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.cygwin.exe.debug"/>
+<tool id="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug.1179519559" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.cygwin.exe.debug">
+<inputType id="cdt.managedbuild.tool.gnu.assembler.input.158172049" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
 </tool>
-<tool id="cdt.managedbuild.tool.gnu.archiver.cygwin.base.1409380109" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.cygwin.base"/>
-<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug.1071610891" name="Cygwin C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug">
-<option id="gnu.cpp.compiler.cygwin.exe.debug.option.optimization.level.1075170933" name="Optimization Level" superClass="gnu.cpp.compiler.cygwin.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
-<option id="gnu.cpp.compiler.cygwin.exe.debug.option.debugging.level.1601107425" name="Debug Level" superClass="gnu.cpp.compiler.cygwin.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
-<option id="gnu.cpp.compiler.option.include.paths.1552449975" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
+<tool id="cdt.managedbuild.tool.gnu.archiver.cygwin.base.1054162859" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.cygwin.base"/>
+<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug.3215261" name="Cygwin C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.cygwin.exe.debug">
+<option id="gnu.cpp.compiler.cygwin.exe.debug.option.optimization.level.1081114180" name="Optimization Level" superClass="gnu.cpp.compiler.cygwin.exe.debug.option.optimization.level" value="gnu.cpp.compiler.optimization.level.none" valueType="enumerated"/>
+<option id="gnu.cpp.compiler.cygwin.exe.debug.option.debugging.level.2050691257" name="Debug Level" superClass="gnu.cpp.compiler.cygwin.exe.debug.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+<option id="gnu.cpp.compiler.option.include.paths.689035088" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" valueType="includePath">
 <listOptionValue builtIn="false" value="&quot;../include&quot;"/>
+<listOptionValue builtIn="false" value="&quot;../../Logger/include&quot;"/>
 </option>
-<option id="gnu.cpp.compiler.option.other.other.1564328916" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -fprofile-arcs -ftest-coverage" valueType="string"/>
-<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin.1911860792" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin"/>
+<option id="gnu.cpp.compiler.option.other.other.1757967634" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" value="-c -fmessage-length=0 -fprofile-arcs -ftest-coverage" valueType="string"/>
+<option id="gnu.cpp.compiler.option.preprocessor.def.940075024" name="Defined symbols (-D)" superClass="gnu.cpp.compiler.option.preprocessor.def" valueType="definedSymbols">
+<listOptionValue builtIn="false" value="CPPUNIT_MAIN=main"/>
+</option>
+<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin.1124941407" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input.cygwin"/>
 </tool>
-<tool id="cdt.managedbuild.tool.gnu.c.compiler.cygwin.exe.debug.1412036276" name="Cygwin C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.cygwin.exe.debug">
-<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.cygwin.exe.debug.option.optimization.level.1238015261" name="Optimization Level" superClass="gnu.c.compiler.cygwin.exe.debug.option.optimization.level" valueType="enumerated"/>
-<option id="gnu.c.compiler.cygwin.exe.debug.option.debugging.level.1741485621" name="Debug Level" superClass="gnu.c.compiler.cygwin.exe.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
-<option id="gnu.c.compiler.option.include.paths.1567967820" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths"/>
-<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.cygwin.815407700" superClass="cdt.managedbuild.tool.gnu.c.compiler.input.cygwin"/>
+<tool id="cdt.managedbuild.tool.gnu.c.compiler.cygwin.exe.debug.320529627" name="Cygwin C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.cygwin.exe.debug">
+<option defaultValue="gnu.c.optimization.level.none" id="gnu.c.compiler.cygwin.exe.debug.option.optimization.level.1508284766" name="Optimization Level" superClass="gnu.c.compiler.cygwin.exe.debug.option.optimization.level" valueType="enumerated"/>
+<option id="gnu.c.compiler.cygwin.exe.debug.option.debugging.level.1077183006" name="Debug Level" superClass="gnu.c.compiler.cygwin.exe.debug.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.cygwin.1957557962" superClass="cdt.managedbuild.tool.gnu.c.compiler.input.cygwin"/>
 </tool>
-<tool id="cdt.managedbuild.tool.gnu.c.linker.cygwin.exe.debug.1116632454" name="Cygwin C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.cygwin.exe.debug"/>
-<tool id="cdt.managedbuild.tool.gnu.cpp.linker.cygwin.exe.debug.1130033168" name="Cygwin C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.cygwin.exe.debug">
-<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.301898408" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
+<tool id="cdt.managedbuild.tool.gnu.c.linker.cygwin.exe.debug.592732086" name="Cygwin C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.cygwin.exe.debug"/>
+<tool id="cdt.managedbuild.tool.gnu.cpp.linker.cygwin.exe.debug.646135384" name="Cygwin C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.cygwin.exe.debug">
+<option id="gnu.cpp.link.option.flags.1597356591" name="Linker flags" superClass="gnu.cpp.link.option.flags" value="-fprofile-arcs" valueType="string"/>
+<option id="gnu.cpp.link.option.libs.754590681" name="Libraries (-l)" superClass="gnu.cpp.link.option.libs" valueType="libs">
+<listOptionValue builtIn="false" value="cppunit"/>
+<listOptionValue builtIn="false" value="Logger"/>
+</option>
+<option id="gnu.cpp.link.option.paths.698304209" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+<listOptionValue builtIn="false" value="&quot;${CYGWIN}/usr/local/lib&quot;"/>
+<listOptionValue builtIn="false" value="&quot;../../Logger/UnitTestLib&quot;"/>
+</option>
+<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.73104234" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
 </inputType>
@@ -710,7 +717,8 @@
 </folderInfo>
 <sourceEntries>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
-<entry excluding="src|include|test" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="test|include|src" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="test"/>
 <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="include"/>
 </sourceEntries>
 </configuration>

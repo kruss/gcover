@@ -1,6 +1,6 @@
 cxx_configuration "Dummy" do
   exe "Dummy",
-  	:dependencies => ['Logger', 'FooLib'],
+  	:dependencies => ['Logger', 'FooLib', 'FooLib2'],
   	:includes => [],
     :sources => FileList.new('src/**/*.cpp')
 end

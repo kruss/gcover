@@ -9,6 +9,7 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include subdir.mk
+-include test/subdir.mk
 -include src/subdir.mk
 -include objects.mk
 
@@ -38,19 +39,19 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: Dummy.exe
+all: FooLib2.exe
 
 # Tool invocations
-Dummy.exe: $(OBJS) $(USER_OBJS)
+FooLib2.exe: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: Cygwin C++ Linker'
-	g++ -L"../../Logger/Debug" -L"../../FooLib/Debug" -L"../../FooLib2/Debug" -o"Dummy.exe" $(OBJS) $(USER_OBJS) $(LIBS)
+	g++ -L"/usr/local/lib" -L"../../Logger/UnitTestLib" -fprofile-arcs -o"FooLib2.exe" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) Dummy.exe
+	-$(RM) $(C++_DEPS)$(OBJS)$(C_DEPS)$(CC_DEPS)$(CPP_DEPS)$(EXECUTABLES)$(CXX_DEPS)$(C_UPPER_DEPS) FooLib2.exe
 	-@echo ' '
 
 .PHONY: all clean dependents
