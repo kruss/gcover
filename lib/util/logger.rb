@@ -29,14 +29,22 @@ class Logger
 	end
 	
 	def Logger.debug(text)
-		log = "~ "+text+"\n"
+		log = "  "+text+"\n"
 		writeFile(log)
 	end
 	
 	def Logger.error(text)
-		log = "! "+text+"\n"
+		log = "!!! "+text+"\n"
 		writeConsole(log)
 		writeFile(log)
+	end
+	
+	def Logger.trace(exception)
+	
+		Logger.error exception.class.to_s+": "+exception
+		exception.backtrace.each do |trace| 
+			Logger.debug trace
+		end  
 	end
 	
 	def Logger.skipLine

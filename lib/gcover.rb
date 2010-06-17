@@ -33,7 +33,12 @@ class GCover
 				Logger.log "include: all sources"
 			end
 			
-			runApplication()
+			begin
+				runApplication()
+			rescue => exception
+				Logger.trace exception
+				exit(-1)
+			end
 			
 			if $AppOptions[:xml] then 
 				deleteOutputFolder()
@@ -74,6 +79,11 @@ private
 			$AppOptions[:browser] = false
 				opts.on("-b", "--browser", "Open browser on output") do
 				$AppOptions[:browser] = true
+			end
+			
+			$AppOptions[:cxx] = false
+				opts.on(nil, "--cxx", "Use cxxproject build-layout") do
+				$AppOptions[:cxx] = true
 			end
 	
 			opts.on("-h", "--help", "Display this screen") do
@@ -137,6 +147,10 @@ private
 	end
 
 	def runApplication()
+		
+		if $AppOptions[:cxx] then
+			raise "sorry,- cxx support not yet implemented..."
+		end
 		
 		# run gcov
 		gcovRunner = GcovRunner.new($AppOptions[:workspace], $AppOptions[:output])

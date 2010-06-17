@@ -107,8 +107,8 @@ task :make_example_run => [:make_example_build] do
     end  
 end
 
-desc "Gcover makefile example"
-task :make_example_gcover => [:make_example_run] do
+desc "Cover makefile example"
+task :make_example_cover => [:make_example_run] do
     run_cmd("gcover example")
 end
 
@@ -147,9 +147,9 @@ task :cxx_example_run => [:cxx_example_build] do
     end   
 end
 
-desc "Gcover cxxproject example"
-task :cxx_example_gcover => [:cxx_example_run] do
-    run_cmd("gcover example -cxx")
+desc "Cover cxxproject example"
+task :cxx_example_cover => [:cxx_example_run] do
+    run_cmd("gcover example --cxx")
 end
 
 ### TOOLS #################################################
