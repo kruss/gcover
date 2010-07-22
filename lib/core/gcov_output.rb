@@ -16,11 +16,10 @@ class GcovOutput
 		outputFile = nil
 		
 		if !$AppOptions[:xml] then
-			outputFile = createHtmlOutput(gcovAnalyzer)
-			Logger.log "html-output: "+outputFile
+			createXmlOutput(gcovAnalyzer, @outputFolder)
+			outputFile = createHtmlOutput(gcovAnalyzer, @outputFolder)
 		else
-			outputFile = createXmlOutput(gcovAnalyzer)
-			Logger.log "xml-output: "+outputFile
+			outputFile = createXmlOutput(gcovAnalyzer, ".")
 		end
 		
 		if outputFile != nil && $AppOptions[:browser] then
@@ -33,17 +32,19 @@ class GcovOutput
 		end
 	end
 	
-	def createHtmlOutput(gcovAnalyzer)
+	def createHtmlOutput(gcovAnalyzer, outputFolder)
 	
-		htmlOutput = WorkspaceHtml.new(@workspaceFolder, @outputFolder)
+		htmlOutput = WorkspaceHtml.new(@workspaceFolder, outputFolder)
 		htmlOutput.createHtmlOutput(gcovAnalyzer.testedProjects, gcovAnalyzer.untestedProjects)
+		Logger.log "html-output: "+htmlOutput.outputFile
 		return htmlOutput.outputFile
 	end
 	
-	def createXmlOutput(gcovAnalyzer)
+	def createXmlOutput(gcovAnalyzer, outputFolder)
 	
-		xmlOutput = WorkspaceXml.new(@workspaceFolder, ".") # output to current directory
+		xmlOutput = WorkspaceXml.new(@workspaceFolder, outputFolder)
 		xmlOutput.createXmlOutput(gcovAnalyzer.testedProjects)
+		Logger.log "xml-output: "+xmlOutput.outputFile
 		return xmlOutput.outputFile
 	end
 

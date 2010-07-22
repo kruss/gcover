@@ -80,11 +80,6 @@ private
 				opts.on("-b", "--browser", "Open browser on output") do
 				$AppOptions[:browser] = true
 			end
-			
-			$AppOptions[:cxx] = false
-				opts.on(nil, "--cxx", "Use cxxproject build-layout") do
-				$AppOptions[:cxx] = true
-			end
 	
 			opts.on("-h", "--help", "Display this screen") do
 				puts opts
@@ -133,24 +128,20 @@ private
 		end
 	end
 	
+	def createOutputFolder
+
+		deleteOutputFolder
+		FileUtils.mkdir_p($AppOptions[:output])
+	end
+	
 	def deleteOutputFolder
 	
 		if FileTest.directory?($AppOptions[:output]) then 
 			FileUtils.rm_rf($AppOptions[:output])
 		end
 	end
-	
-	def createOutputFolder
-
-		deleteOutputFolder
-		FileUtils.mkdir_p($AppOptions[:output])
-	end
 
 	def runApplication()
-		
-		if $AppOptions[:cxx] then
-			raise "sorry,- cxx support not yet implemented..."
-		end
 		
 		# run gcov
 		gcovRunner = GcovRunner.new($AppOptions[:workspace], $AppOptions[:output])
