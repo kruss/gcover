@@ -26,7 +26,7 @@ class WorkspaceHtml
 		
 		# header
 		html = HtmlUtil.getHeader($AppName)
-		html << "<h1>Workspace [ "+@workspaceFolder+" ] - "+workspaceStatistic.getCoverRatio.to_s+" %</h1> \n"
+		html << "<h1>"+$AppNameUI+" [ "+@workspaceFolder+" ] - "+workspaceStatistic.getCoverRatio.to_s+" %</h1> \n"
 
 		# total
 		html << "<p><font class='small'> \n"	

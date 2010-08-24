@@ -1,0 +1,42 @@
+require 'rake/gempackagetask'
+
+GEM_NAME 	= "testrunner"
+GEM_VERSION = "0.1.0"
+
+### GEM ###################################################
+
+spec = Gem::Specification.new do |s|
+	s.name = GEM_NAME
+	s.version = GEM_VERSION
+	s.author = "Kevin russ"
+	s.email = "kruss@lear.com"
+	s.platform = Gem::Platform::RUBY
+	s.summary = "Run cppunit-tests within a workspace"
+	s.files = FileList["{bin,tests,lib,docs}/**/*"].exclude("rdoc").to_a
+	s.require_path = "lib"
+	s.has_rdoc = false
+	s.extra_rdoc_files = ["README"]
+	s.executables = [GEM_NAME]
+end
+Rake::GemPackageTask.new(spec) {|pkg|}
+
+desc "Install the gem"
+task :gem_install => [:gem] do
+    run_cmd("gem install pkg/#{spec.name}-#{spec.version}.gem")
+end
+
+desc "Uninstall the gem"
+task :gem_uninstall do
+    run_cmd("gem uninstall #{spec.name}")
+end
+
+### TOOLS #################################################
+
+def run_cmd(cmd)
+    if !system(cmd) then
+    	puts "unable to run: "+cmd
+    	exit(-1)
+    end
+end
+
+###########################################################

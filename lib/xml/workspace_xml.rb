@@ -23,7 +23,7 @@ class WorkspaceXml
 		# create xml
 		xml = XmlUtil.getHeader
 		workspaceStatistic = WorkspaceStatistic.new(testedProjects)
-		xml << XmlUtil.openTag("workspace", {
+		xml << XmlUtil.openTag($AppName, {
 			"path"=>@workspaceFolder,
 			"lines"=>workspaceStatistic.getTotalLines.to_s,
 			"executed"=>workspaceStatistic.getExecutedLines.to_s,
@@ -57,7 +57,7 @@ class WorkspaceXml
 			xml << XmlUtil.closeTag("project")
 		
 		end
-		xml << XmlUtil.closeTag("workspace")
+		xml << XmlUtil.closeTag($AppName)
 		
 		# output
 		FileUtil.writeFile(outputFile, xml)

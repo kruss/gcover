@@ -1,25 +1,24 @@
-# generates gcov code-coverage for cppunit-tests
+# run cppunit-tests within a workspace
 
 require "optparse"
-require "core/gcov_runner"
-require "core/gcov_analyzer"
-require "core/gcov_output"
+require "core/cppunit_runner"
+require "core/cppunit_output"
 require "util/logger"
 
-$AppName = "gcover"
-$AppNameUI = "Gcover"
+$AppName = "testrunner"
+$AppNameUI = "CppUnit"
 $AppVersion = "0.1.0"
-$AppOutput = ".gcover"
+$AppOutput = ".test"
 $AppOptions = {}
 
-class GCover
+class TestRunner
 
 	def initialize()
 
 		setOptions()
 	end
 	
-	# generate code-coverage
+	# run unit-tests
 	def run()
 
 		if validOptions() then
@@ -30,9 +29,6 @@ class GCover
 			Logger.info $AppName+" ("+$AppVersion+")"
 			Logger.log "workspace-folder: "+$AppOptions[:workspace]
 			Logger.log "output-folder: "+$AppOptions[:output]
-			if $AppOptions[:all] then 
-				Logger.log "include: all sources"
-			end
 			
 			begin
 				runApplication()
@@ -67,11 +63,16 @@ private
 				$AppOptions[:output] = cleanPath(folder)+"/"+$AppOutput
 			end
 			
-			$AppOptions[:all] = false
-				opts.on("-a", "--all", "All sources (include 'test' folders)") do
-				$AppOptions[:all] = true
-			end
-			
+      $AppOptions[:config] = "UnitTest"
+        opts.on("-c", "--config NAME", "Set unit-test configuration NAME (def: UnitTest)") do |name|
+        $AppOptions[:config] = name
+      end
+    
+      $AppOptions[:extention] = "exe"
+        opts.on("-e", "--extention NAME", "Set unit-test extention NAME (def: exe)") do |name|
+        $AppOptions[:extention] = name
+      end
+    
 			$AppOptions[:xml] = false
 				opts.on("-x", "--xml", "Dump results as XML only") do
 				$AppOptions[:xml] = true
@@ -81,7 +82,12 @@ private
 				opts.on("-b", "--browser", "Open browser on output") do
 				$AppOptions[:browser] = true
 			end
-	
+
+      $AppOptions[:fail] = false
+        opts.on("-f", "--fail", "Fail on errors") do
+        $AppOptions[:fail] = true
+      end
+    
 			opts.on("-h", "--help", "Display this screen") do
 				puts opts
 				exit(0)
@@ -144,19 +150,20 @@ private
 
 	def runApplication()
 		
-		# run gcov
-		gcovRunner = GcovRunner.new($AppOptions[:workspace], $AppOptions[:output])
-		gcovRunner.fetchUnitTests
-		gcovRunner.runGcov
-		
-		# analyze gcov
-		gcovAnalyzer = GcovAnalyzer.new($AppOptions[:workspace], $AppOptions[:output])
-		gcovAnalyzer.analyzeUnitTests(gcovRunner)
-		gcovAnalyzer.createCodeCoverage
+		# run unit-tests
+		cppunitRunner = CppUnitRunner.new($AppOptions[:workspace], $AppOptions[:output])
+    cppunitRunner.fetchUnitTests
+		cppunitRunner.runUnitTests
 	
 		# create output
-		gcovOutput = GcovOutput.new($AppOptions[:workspace], $AppOptions[:output])
-		gcovOutput.createOutput(gcovAnalyzer)
+		cppunitOutput = CppUnitOutput.new($AppOptions[:workspace], $AppOptions[:output])
+		cppunitOutput.createOutput(cppunitRunner)
 
+    # final status
+    Logger.info("Status: "+Status::getString(cppunitRunner.status))
+    if $AppOptions[:fail] && cppunitRunner.status == Status::ERROR then
+      exit(-1)
+    end
+  
 	end
 end

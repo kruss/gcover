@@ -1,0 +1,4 @@
+testrunner is a ruby gem to run cppunit-tests within a workspace.
+cppunit-tests must be already compiled,- output is written to .test metafolder.
+
+usage: testrunner <workspace> [options ...]
