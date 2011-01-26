@@ -42,7 +42,13 @@ class WorkspaceHtml
         testStatus = unitTest.status
         
         html << "<tr>"
-        html << "<td>"+idx.to_s+".) <b><a href='"+projectName+"/cppunit.log'>"+projectName+"</a></b></td>"
+        html << "<td>"+idx.to_s+".) <b>"
+        if FileTest.file?(@outputFolder+"/"+projectName+"/cppunit.log") then
+          html << "<a href='"+projectName+"/cppunit.log'>"+projectName+"</a>"
+        else
+          html << projectName
+        end
+        html << "</b></td>"
         html << "<td>"+Status::getHtml(testStatus)+"</td>"
         html << "<tr> \n"
       end

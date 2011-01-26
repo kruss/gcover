@@ -5,6 +5,7 @@ class Status
   UNDEFINED=1
   SUCCEED=2
   ERROR=3
+  FAILURE=4
   
   def Status::getString(status)
   
@@ -13,6 +14,8 @@ class Status
       return "SUCCEED"
     when ERROR
       return "ERROR"
+    when FAILURE
+      return "FAILURE"
     else
       return "UNDEFINED"
     end
@@ -25,6 +28,8 @@ class Status
       return "<font color=green>SUCCEED</font>"
     when ERROR
       return "<font color=red>ERROR</font>"
+    when FAILURE
+      return "<font color=purple>FAILURE</font>"
     else
       return "<font color=gray>UNDEFINED</font>"
     end

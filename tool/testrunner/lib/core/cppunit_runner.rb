@@ -18,7 +18,6 @@ class CppUnitRunner
 	attr_accessor :unitTests
   attr_accessor :status
 
-	# get gcov data-files and extract unit-tests
 	def fetchUnitTests
 		
     testExecutables = FileList.new(@workspaceFolder+"/*/"+$AppOptions[:config]+"/*."+$AppOptions[:extention])
@@ -39,16 +38,18 @@ class CppUnitRunner
     Logger.log "unit-tests: "+@unitTests.size().to_s
 	end
 	
-	# run gcov on collected unit-tests
 	def runUnitTests
 		
 		@unitTests.each do |unitTest|
 			Logger.info "unit-test - "+unitTest.projectName
-			
-			unitTest.createOutputFolder
-			unitTest.runUnitTest
-      unitTest.getTestResults
-      
+      begin
+  			unitTest.createOutputFolder
+  			unitTest.runUnitTest
+        unitTest.getTestResults
+      rescue Exception => e  
+        Logger.error e.message
+        unitTest.status = Status::FAILURE
+      end
 		end
 	end
 
