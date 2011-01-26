@@ -8,7 +8,7 @@ require "util/logger"
 $AppName = "testrunner"
 $AppNameUI = "CppUnit"
 $AppVersion = "0.1.0"
-$AppOutput = ".test"
+$AppOutput = ".testrunner"
 $AppOptions = {}
 
 class TestRunner
@@ -59,7 +59,7 @@ private
 			opts.banner = $AppName+" <workspace> [options ...]"
 			
 			$AppOptions[:output] = nil
-				opts.on("-o", "--output FOLDER", "Output code-coverage to FOLDER") do |folder|
+				opts.on("-o", "--output FOLDER", "Output test-results to FOLDER") do |folder|
 				$AppOptions[:output] = cleanPath(folder)+"/"+$AppOutput
 			end
 			
