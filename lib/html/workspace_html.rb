@@ -84,6 +84,13 @@ class WorkspaceHtml
 			html << "</ol> \n"
 		end
 		
+    # logfile
+    if FileTest.file?(Logger.getLogfile()) then
+      html << "<p> \n"
+      html << "<a href='"+$AppName+".log'>Logfile</a> \n"
+      html << "</p> \n"
+    end
+   
 		# footer
 		html << HtmlUtil.getFooter
 		

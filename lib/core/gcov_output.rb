@@ -42,6 +42,13 @@ class GcovOutput
 	
 	def createXmlOutput(gcovAnalyzer, outputFolder)
 	
+    begin
+      require "feedback"
+    rescue Exception => e
+      Logger.error e.message
+      return nil
+    end
+    
 		xmlOutput = WorkspaceXml.new(@workspaceFolder, outputFolder)
 		xmlOutput.createXmlOutput(gcovAnalyzer.testedProjects)
 		Logger.log "xml-output: "+xmlOutput.outputFile
