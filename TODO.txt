@@ -1,0 +1,2 @@
+
+# mask special chars in output as eg "<code>for (uint16 i=0; i<fClients.size(); i++)</code></font" get trunkated at '<'
