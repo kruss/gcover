@@ -12,7 +12,7 @@ class GcovOutput
 	end
 	
 	def createOutput(gcovAnalyzer)
-		@logger.emph "create output"
+		@logger.emph "output"
 		outputFile = nil
 		
 		if !$AppOptions[:xml] then

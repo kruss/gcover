@@ -3,7 +3,6 @@
 require "rake"
 require "pathname"
 require "data/unit_test"
-require "util/sys_logger"
 
 class GcovRunner
 

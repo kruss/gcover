@@ -7,13 +7,12 @@ require "statistic/project_statistic"
 require "html/project_html"
 require "util/html_util"
 require "util/file_util"
-require "util/sys_logger"
 
 class WorkspaceHtml
 
 	def initialize(workspaceFolder, outputFolder)
 		@workspaceFolder = workspaceFolder		# workspace-folder path
-		@outputFolder = outputFolder			# output-folder path
+		@outputFolder = outputFolder			    # output-folder path
 	end
 	
 	def outputFile

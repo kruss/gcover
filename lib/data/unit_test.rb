@@ -1,6 +1,5 @@
 # a unit-test project with gcov instrumented object-files
 
-require "util/sys_logger"
 require "util/command"
 require "fileutils"
 

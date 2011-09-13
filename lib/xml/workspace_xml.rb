@@ -4,7 +4,6 @@ require "core/gcov_analyzer"
 require "data/tested_project"
 require "statistic/workspace_statistic"
 require "statistic/project_statistic"
-require "util/sys_logger"
 
 class WorkspaceXml
 

@@ -5,7 +5,6 @@ require "data/unit_test"
 require "data/tested_project"
 require "util/gcov_util"
 require "statistic/project_statistic"
-require "util/sys_logger"
 
 class GcovAnalyzer
 
@@ -33,7 +32,7 @@ class GcovAnalyzer
 	end
 
 	def createCodeCoverage
-		@logger.emph "test coverage"
+		@logger.emph "coverage"
 		@testedProjects.each do |testedProject|
       @logger.info "project: #{testedProject.projectName}"  
 			testedProject.createOutputFolder
