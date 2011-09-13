@@ -51,7 +51,7 @@ class GcovAnalyzer
 private
 
 	def applyInternGcovFiles(unitTest)
-      @logger.debug "apply intern-gcov files..." 
+      @logger.debug "apply intern-gcov files: #{unitTest.projectName} (#{unitTest.internGcovFiles.size})" 
 			testedProject = @testedProjects.find{ |item| item.projectName.eql?(unitTest.projectName) }
       
 			if testedProject == nil then
@@ -66,7 +66,7 @@ private
 	end
 
 	def applyExternGcovFiles(unitTest)
-	  @logger.debug "apply extern-gcov files..."
+	  @logger.debug "apply extern-gcov files: #{unitTest.projectName} (#{unitTest.externGcovFiles.size})"
 		unitTest.externGcovFiles.each do |gcovFile|
 			projectName = GcovUtil.getProjectName(gcovFile)
 			testedProject = @testedProjects.find{ |item| item.projectName.eql?(projectName) }
@@ -84,7 +84,7 @@ private
 	
 	# collects remaining projects with source-files wich are not covered by any test
 	def fetchUntestedProjects 
-    @logger.debug "search untested projects..."
+    @logger.debug "search untested projects: #{@workspaceFolder}"
 		projectFolders = FileList.new(@workspaceFolder+"/*/")
 		projectFolders.exclude(@workspaceFolder+"/.*/") # no meta-data		
 		projectFolders.each do |projectFolder|
@@ -93,7 +93,7 @@ private
 			
 				projectPath = Pathname.new(projectFolder).cleanpath.to_s
 				if @testedProjects.find{ |item| item.projectFolder.eql?(projectPath) } == nil then
-          @logger.debug "=> #{projectPath}"    
+          @logger.debug "=> untested project: #{File.basename(projectPath)}"    
 					@untestedProjects << projectPath
 				end
 			end
