@@ -7,7 +7,7 @@ require "statistic/project_statistic"
 require "html/project_html"
 require "util/html_util"
 require "util/file_util"
-require "util/logger"
+require "util/sys_logger"
 
 class WorkspaceHtml
 
@@ -85,7 +85,7 @@ class WorkspaceHtml
 		end
 		
     # logfile
-    if FileTest.file?(Logger.getLogfile()) then
+    if FileTest.file?("#{$AppOptions[:output]}/#{$AppName}.log") then
       html << "<p> \n"
       html << "<a href='"+$AppName+".log'>Logfile</a> \n"
       html << "</p> \n"

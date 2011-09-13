@@ -42,12 +42,12 @@ class HtmlUtil
 		b = 100 - a
 		graph = "<pre style='margin-top=0;margin-left=0;margin-right=0;margin-bottom=1'>"
 		graph << "<font style='background-color:green;font-size:7pt'>"
-		for i in (1..a)
+    1.upto(a) do
 			graph << " "
 		end
 		graph << "</font>"
 		graph << "<font style='background-color:red;font-size:7pt'>"
-		for i in (1..b)
+		1.upto(b) do
 			graph << " "
 		end
 		graph << "</font>"

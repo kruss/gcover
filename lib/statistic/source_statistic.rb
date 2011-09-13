@@ -4,7 +4,6 @@ require "data/tested_line"
 class SourceStatistic
 
 	def initialize(testedLines)
-		
 		@testedLines = testedLines				# lines with code-coverage
 	end
 	

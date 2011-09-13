@@ -5,7 +5,6 @@ require "statistic/project_statistic"
 class WorkspaceStatistic
 
 	def initialize(testedProjects)
-	
 		@testedProjects = testedProjects 		# projects with code-coverage
 	end
 	

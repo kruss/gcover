@@ -4,49 +4,37 @@ require "optparse"
 require "core/gcov_runner"
 require "core/gcov_analyzer"
 require "core/gcov_output"
-require "util/logger"
+require "util/gem_logger"
 
 $AppName = "gcover"
 $AppNameUI = "Gcover"
-$AppVersion = "0.1.0"
+$AppVersion = "0.1.1"
 $AppOutput = ".gcover"
 $AppOptions = {}
 
 class GCover
 
 	def initialize()
-
 		setOptions()
 	end
 	
 	# generate code-coverage
 	def run()
-
 		if validOptions() then
-
 			createOutputFolder()
-			Logger.setLogfile($AppOptions[:output]+"/"+$AppName+".log")
-	
-			Logger.info $AppName+" ("+$AppVersion+")"
-			Logger.log "workspace-folder: "+$AppOptions[:workspace]
-			Logger.log "output-folder: "+$AppOptions[:output]
-			if $AppOptions[:all] then 
-				Logger.log "include: all sources"
-			end
-			
+      logger = GemLogger.new("#{$AppOptions[:output]}/#{$AppName}.log", $AppOptions[:verbose])
 			begin
-				runApplication()
-			rescue => exception
-				Logger.trace exception
+        logger.emph "#{$AppName} (#{$AppVersion})"   
+				runApplication(logger)
+			rescue => error
+				logger.dump error
 				exit(-1)
 			end
-			
 			if $AppOptions[:xml] then 
 				deleteOutputFolder()
 			end
 			exit(0)
 		else
-		
 			puts "try "+$AppName+" --help"
 			exit(-1)
 		end
@@ -55,7 +43,6 @@ class GCover
 private
 	
 	def setOptions()
-		
 		$AppOptions.clear
 		
 		# parse explicit options
@@ -81,7 +68,12 @@ private
 				opts.on("-b", "--browser", "Open browser on output") do
 				$AppOptions[:browser] = true
 			end
-	
+
+      $AppOptions[:verbose] = false
+        opts.on("-v", "--verbose", "Print additional logging") do
+        $AppOptions[:verbose] = true
+      end
+    
 			opts.on("-h", "--help", "Display this screen") do
 				puts opts
 				exit(0)
@@ -106,7 +98,6 @@ private
 	end
 	
 	def validOptions()
-	
 		if 
 			$AppOptions[:workspace] != nil && 
 			$AppOptions[:output] != nil && 
@@ -119,7 +110,6 @@ private
 	end
 	
 	def cleanPath(path)
-	
 		if path == "." then
 			return Dir.getwd
 		elsif path == ".." then
@@ -130,32 +120,30 @@ private
 	end
 	
 	def createOutputFolder
-
 		deleteOutputFolder
 		FileUtils.mkdir_p($AppOptions[:output])
 	end
 	
 	def deleteOutputFolder
-	
 		if FileTest.directory?($AppOptions[:output]) then 
 			FileUtils.rm_rf($AppOptions[:output])
 		end
 	end
 
-	def runApplication()
+	def runApplication(logger)
 		
 		# run gcov
-		gcovRunner = GcovRunner.new($AppOptions[:workspace], $AppOptions[:output])
+		gcovRunner = GcovRunner.new($AppOptions[:workspace], $AppOptions[:output], logger)
 		gcovRunner.fetchUnitTests
 		gcovRunner.runGcov
 		
 		# analyze gcov
-		gcovAnalyzer = GcovAnalyzer.new($AppOptions[:workspace], $AppOptions[:output])
+		gcovAnalyzer = GcovAnalyzer.new($AppOptions[:workspace], $AppOptions[:output], logger)
 		gcovAnalyzer.analyzeUnitTests(gcovRunner)
 		gcovAnalyzer.createCodeCoverage
 	
 		# create output
-		gcovOutput = GcovOutput.new($AppOptions[:workspace], $AppOptions[:output])
+		gcovOutput = GcovOutput.new($AppOptions[:workspace], $AppOptions[:output], logger)
 		gcovOutput.createOutput(gcovAnalyzer)
 
 	end

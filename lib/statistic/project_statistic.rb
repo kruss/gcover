@@ -5,7 +5,6 @@ require "statistic/source_statistic"
 class ProjectStatistic
 
 	def initialize(testedSources)
-	
 		@testedSources = testedSources			# sources with code-coverage
 	end
 	

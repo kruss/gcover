@@ -2,6 +2,7 @@ $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
 require 'test/unit'
 require 'gcover'
+require "logger"
 
 class TcStatistic < Test::Unit::TestCase
 
@@ -65,7 +66,7 @@ class TcStatistic < Test::Unit::TestCase
 		source1 = TestedSource.new("src-1", nil, nil, nil)
 		source2 = TestedSource.new("src-2", nil, nil, nil)
 		
-		project = TestedProject.new("prj-1", nil, nil)
+		project = TestedProject.new("prj-1", nil, nil, Logger.new(nil))
 		project.testedSources << source1
 		project.testedSources << source2
 		
@@ -97,15 +98,15 @@ class TcStatistic < Test::Unit::TestCase
 		source21 = TestedSource.new("src-11", nil, nil, nil)
 		source22 = TestedSource.new("src-12", nil, nil, nil)
 		
-		project1 = TestedProject.new("prj-1", nil, nil)
+		project1 = TestedProject.new("prj-1", nil, nil, Logger.new(nil))
 		project1.testedSources << source11
 		project1.testedSources << source12
 		
-		project2 = TestedProject.new("prj-3", nil, nil)
+		project2 = TestedProject.new("prj-3", nil, nil, Logger.new(nil))
 		project2.testedSources << source21
 		project2.testedSources << source22
 		
-		analyzer = GcovAnalyzer.new(nil, nil)
+		analyzer = GcovAnalyzer.new(nil, nil, Logger.new(nil))
 		analyzer.testedProjects << project1
 		analyzer.testedProjects << project2
 		
