@@ -27,12 +27,21 @@ class UnitTest
 	def runGcov
 		@objectFiles.each do |objectFile|		
 			@logger.info "run gcov: #{objectFile}"
-			configName = Pathname.new(objectFile).relative_path_from(Pathname.new(@projectFolder)).cleanpath.to_s.split("/")[0]
-			configFolder = @projectFolder+"/"+configName	
-			relFolder = Pathname.new(File.dirname(objectFile)).relative_path_from(Pathname.new(configFolder)).cleanpath.to_s
-			relFile = Pathname.new(objectFile).relative_path_from(Pathname.new(configFolder)).cleanpath.to_s			
+      runFolder = nil
+      relFolder = nil
+      relFile = nil
+      if $AppOptions[:lake] then
+        relFolder = Pathname.new(File.dirname(objectFile)).relative_path_from(Pathname.new(@projectFolder)).cleanpath.to_s
+        relFile = Pathname.new(objectFile).relative_path_from(Pathname.new(@projectFolder+"/"+relFolder)).cleanpath.to_s  
+        runFolder = @projectFolder
+      else
+        configName = Pathname.new(objectFile).relative_path_from(Pathname.new(@projectFolder)).cleanpath.to_s.split("/")[0]
+        runFolder = @projectFolder+"/"+configName  
+        relFolder = Pathname.new(File.dirname(objectFile)).relative_path_from(Pathname.new(runFolder)).cleanpath.to_s
+        relFile = Pathname.new(objectFile).relative_path_from(Pathname.new(runFolder)).cleanpath.to_s  
+      end	
 			
-      FileUtils.cd(configFolder) do
+      FileUtils.cd(runFolder) do
         begin
 			      command = "gcov -l -p -o "+relFolder+" "+relFile+" > "+File.basename(objectFile)+".log"
             Command.call(command, @logger)
@@ -45,9 +54,10 @@ class UnitTest
 	
 	def moveGcovFiles
     begin 
-      moveFiles("#{@projectFolder}/*/*.o.log", @outputFolder)
-      moveFiles("#{@projectFolder}/*/*###*.gcov", "#{@outputFolder}/gcov/extern") # first move external gcov-files
-      moveFiles("#{@projectFolder}/*/*.gcov", "#{@outputFolder}/gcov")            # now move the real ones
+      subfolders = $AppOptions[:lake] ? "" : "*/"
+      moveFiles("#{@projectFolder}/#{subfolders}*.o.log", @outputFolder)
+      moveFiles("#{@projectFolder}/#{subfolders}*###*.gcov", "#{@outputFolder}/gcov/extern") # first move external gcov-files
+      moveFiles("#{@projectFolder}/#{subfolders}*.gcov", "#{@outputFolder}/gcov")            # now move the real ones
     rescue => error
       @logger.dump error
     end

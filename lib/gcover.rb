@@ -63,7 +63,12 @@ private
 				opts.on("-x", "--xml", "Dump results as XML only") do
 				$AppOptions[:xml] = true
 			end
-			
+
+      $AppOptions[:lake] = false
+        opts.on("-l", "--lake", "Run gcov in project-folders instead of config-folders") do
+        $AppOptions[:lake] = true
+      end
+    
 			$AppOptions[:browser] = false
 				opts.on("-b", "--browser", "Open browser on output") do
 				$AppOptions[:browser] = true
