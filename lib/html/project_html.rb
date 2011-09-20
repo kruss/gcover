@@ -52,7 +52,7 @@ class ProjectHtml
 				sourceStatistic = SourceStatistic.new(testedSource.testedLines)
 
 				html << "<tr>"
-				html << "<td>"+idx.to_s+".) <a href='html/"+HtmlUtil.urlencode(outputFileName)+"'>"+sourceFileName+"</a></td>"
+				html << "<td>"+idx.to_s+".) <a href='html/"+HtmlUtil.mask_link(outputFileName)+"'>"+sourceFileName+"</a></td>"
 				html << "<td class='small'>"
 					html << HtmlUtil.getRatioGraph(sourceStatistic.getCoverRatio)
 					html << "<b>Lines</b>: "+sourceStatistic.getTotalLines.to_s+" / "

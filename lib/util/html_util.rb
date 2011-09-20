@@ -55,8 +55,12 @@ class HtmlUtil
 		return graph
 	end
 	
-	def HtmlUtil.urlencode(str)
-		str.gsub(/[^a-zA-Z0-9_\.\-]/n) {|s| sprintf('%%%02x', s[0]) }
+	def HtmlUtil.mask_link(url)
+    return url.gsub(/#/, "%23") 
 	end
+  
+  def HtmlUtil.mask_content(content)
+    return content.gsub(/</, "&lt;").gsub(/>/, "&gt;") 
+  end
 	
 end

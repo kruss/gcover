@@ -37,7 +37,7 @@ class SourceHtml
 		if siblings.size() > 0 then
 			html << "<ul class='small'> \n"
 			siblings.each do |sibling|
-				html << "<li><a href='"+HtmlUtil.urlencode(sibling.outputFileName)+"'>"+sibling.sourceFileName+"</a></li> \n"
+				html << "<li><a href='"+HtmlUtil.mask_link(sibling.outputFileName)+"'>"+sibling.sourceFileName+"</a></li> \n"
 			end
 			html << "</ul> \n"
 			html << "<hr> \n"
@@ -65,7 +65,7 @@ class SourceHtml
 					html << "<font color='black'>"
 				end			
 				html << sprintf("%3d", testedLine.idx)+":"
-				html << "<code>"+testedLine.content+"</code>"
+				html << "<code>"+HtmlUtil.mask_content(testedLine.content)+"</code>"
 				html << "</font> \n"
 			end
 			if testedLines.size() > 0 then
@@ -88,7 +88,7 @@ class SourceHtml
 				projectName = gcovFile.split("/").reverse[2] # get origin of gcov-file
 				fileName = File.basename(gcovFile)
 				objectFile = GcovUtil.getObjectPath(gcovFile)
-				html << "<li><a href='../../"+projectName+"/gcov/"+HtmlUtil.urlencode(fileName)+"'>"+projectName+"::"+objectFile+"</a></li> \n"
+				html << "<li><a href='../../"+projectName+"/gcov/"+HtmlUtil.mask_link(fileName)+"'>"+projectName+"::"+objectFile+"</a></li> \n"
 			end
 			html << "</ul> \n"
 		end

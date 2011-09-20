@@ -2,7 +2,6 @@
 
 $:.unshift File.join(File.dirname(__FILE__), "..", "tests")
 
-require 'test/unit/testsuite'
 require 'tc_options'
 require 'tc_statistic'
 require 'tc_util'
