@@ -74,7 +74,7 @@ private
 			if testedProject == nil then
 				projectFolder = @workspaceFolder+"/"+projectName 
 				outputFolder = @outputFolder+"/"+projectName 
-				testedProject = TestedProject.new(projectName, projectFolder, outputFolder)
+				testedProject = TestedProject.new(projectName, projectFolder, outputFolder, @logger)
 				@testedProjects << testedProject
 			end
 			@logger.debug "=> #{testedProject.projectName}: #{gcovFile}" 
