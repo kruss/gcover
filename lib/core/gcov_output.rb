@@ -42,8 +42,8 @@ class GcovOutput
 	def createXmlOutput(gcovAnalyzer, outputFolder)
     begin
       require "feedback"
-    rescue error
-      @logger.warn e.message
+    rescue LoadError => error
+      @logger.warn "could not create xml: #{error.message}"
       return nil
     end
     
