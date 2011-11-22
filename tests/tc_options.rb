@@ -1,7 +1,7 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
-require 'test/unit'
-require 'gcover'
+require "test/unit"
+require "gcover/gcover"
 
 class TcOptions < Test::Unit::TestCase
 
@@ -15,7 +15,7 @@ class TcOptions < Test::Unit::TestCase
 	def test_no_option
 	
 		ARGV.clear()
-		gcover = GCover.new()
+		GCover.new()
 		assert_equal(nil, $AppOptions[:workspace])
 		assert_equal(nil, $AppOptions[:output])
 		
@@ -120,7 +120,7 @@ class TcOptions < Test::Unit::TestCase
 	def test_too_many_option
 		
 		ARGV.clear()
-		gcover = GCover.new()
+		GCover.new()
 		ARGV << "workspace"
 		ARGV << "dummy"
 		assert_equal(nil, $AppOptions[:workspace])

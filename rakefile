@@ -1,7 +1,7 @@
 require 'rake/gempackagetask'
 
 GEM_NAME 	= "gcover"
-GEM_VERSION = "0.1.1"
+GEM_VERSION = "0.2.0"
 
 ### ALL ###################################################
 

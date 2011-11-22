@@ -1,7 +1,7 @@
 $:.unshift File.join(File.dirname(__FILE__), "..", "lib")
 
-require 'test/unit'
-require 'gcover'
+require "test/unit"
+require "gcover/gcover"
 
 class TcUtil < Test::Unit::TestCase
 

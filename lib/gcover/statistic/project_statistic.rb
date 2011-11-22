@@ -1,6 +1,6 @@
 
-require "data/tested_source"
-require "statistic/source_statistic"
+require "gcover/data/tested_source"
+require "gcover/statistic/source_statistic"
 
 class ProjectStatistic
 

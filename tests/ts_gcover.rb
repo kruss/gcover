@@ -2,9 +2,9 @@
 
 $:.unshift File.join(File.dirname(__FILE__), "..", "tests")
 
-require 'tc_options'
-require 'tc_statistic'
-require 'tc_util'
+require "tc_options"
+require "tc_statistic"
+require "tc_util"
 
 class TsGCover
 

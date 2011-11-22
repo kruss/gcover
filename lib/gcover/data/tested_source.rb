@@ -1,6 +1,6 @@
 # a source-file with associated gcov-files
 
-require "data/tested_line"
+require "gcover/data/tested_line"
 
 class TestedSource
 

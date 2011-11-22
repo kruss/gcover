@@ -1,7 +1,7 @@
 # creates output for gcov-data
 
-require "html/workspace_html"
-require "xml/workspace_xml"
+require "gcover/html/workspace_html"
+require "gcover/xml/workspace_xml"
 
 class GcovOutput
 
@@ -41,7 +41,7 @@ class GcovOutput
 	
 	def createXmlOutput(gcovAnalyzer, outputFolder)
     begin
-      require "feedback"
+      require "feedback/feedback"
     rescue LoadError => error
       @logger.warn "could not create xml: #{error.message}"
       return nil

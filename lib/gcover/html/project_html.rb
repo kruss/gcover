@@ -1,10 +1,10 @@
-require "data/tested_project"
-require "data/tested_source"
-require "statistic/project_statistic"
-require "statistic/source_statistic"
-require "html/source_html"
-require "util/html_util"
-require "util/file_util"
+require "gcover/data/tested_project"
+require "gcover/data/tested_source"
+require "gcover/statistic/project_statistic"
+require "gcover/statistic/source_statistic"
+require "gcover/html/source_html"
+require "gcover/util/html_util"
+require "gcover/util/file_util"
 
 class ProjectHtml
 

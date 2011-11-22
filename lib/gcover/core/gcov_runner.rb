@@ -2,7 +2,7 @@
 
 require "rake"
 require "pathname"
-require "data/unit_test"
+require "gcover/data/unit_test"
 
 class GcovRunner
 

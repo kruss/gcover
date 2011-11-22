@@ -1,14 +1,14 @@
 # generates gcov code-coverage for cppunit-tests
 
 require "optparse"
-require "core/gcov_runner"
-require "core/gcov_analyzer"
-require "core/gcov_output"
-require "util/gem_logger"
+require "gcover/core/gcov_runner"
+require "gcover/core/gcov_analyzer"
+require "gcover/core/gcov_output"
+require "gcover/util/gem_logger"
 
 $AppName = "gcover"
 $AppNameUI = "Gcover"
-$AppVersion = "0.1.1"
+$AppVersion = "0.2.0"
 $AppOutput = ".gcover"
 $AppOptions = {}
 

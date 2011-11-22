@@ -1,7 +1,7 @@
 # a project with associated gcov-files
 
-require "data/tested_source"
-require "util/gcov_util"
+require "gcover/data/tested_source"
+require "gcover/util/gcov_util"
 
 class TestedProject
 

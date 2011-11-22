@@ -1,6 +1,6 @@
 
-require "data/tested_project"
-require "statistic/project_statistic"
+require "gcover/data/tested_project"
+require "gcover/statistic/project_statistic"
 
 class WorkspaceStatistic
 

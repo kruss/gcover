@@ -1,6 +1,6 @@
-require "data/tested_source"
-require "util/html_util"
-require "util/file_util"
+require "gcover/data/tested_source"
+require "gcover/util/html_util"
+require "gcover/util/file_util"
 
 class SourceHtml
 

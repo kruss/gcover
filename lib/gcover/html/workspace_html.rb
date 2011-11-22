@@ -1,12 +1,12 @@
 # generates html output for gcov-data of an workspace
 
-require "core/gcov_analyzer"
-require "data/tested_project"
-require "statistic/workspace_statistic"
-require "statistic/project_statistic"
-require "html/project_html"
-require "util/html_util"
-require "util/file_util"
+require "gcover/core/gcov_analyzer"
+require "gcover/data/tested_project"
+require "gcover/statistic/workspace_statistic"
+require "gcover/statistic/project_statistic"
+require "gcover/html/project_html"
+require "gcover/util/html_util"
+require "gcover/util/file_util"
 
 class WorkspaceHtml
 

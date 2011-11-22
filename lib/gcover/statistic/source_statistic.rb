@@ -1,5 +1,5 @@
 
-require "data/tested_line"
+require "gcover/data/tested_line"
 
 class SourceStatistic
 

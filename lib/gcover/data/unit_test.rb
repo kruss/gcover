@@ -1,6 +1,6 @@
 # a unit-test project with gcov instrumented object-files
 
-require "util/command"
+require "gcover/util/command"
 require "fileutils"
 
 class UnitTest

@@ -1,10 +1,10 @@
 # analyzes gcov-data of a workspace
 
-require "core/gcov_runner"
-require "data/unit_test"
-require "data/tested_project"
-require "util/gcov_util"
-require "statistic/project_statistic"
+require "gcover/core/gcov_runner"
+require "gcover/data/unit_test"
+require "gcover/data/tested_project"
+require "gcover/util/gcov_util"
+require "gcover/statistic/project_statistic"
 
 class GcovAnalyzer
 
