@@ -27,28 +27,28 @@ class UnitTest
 	def runGcov
 		@objectFiles.each do |objectFile|		
 			@logger.info "run gcov: #{objectFile}"
-      runFolder = nil
-      relFolder = nil
-      relFile = nil
-      if $AppOptions[:lake] then
-        relFolder = Pathname.new(File.dirname(objectFile)).relative_path_from(Pathname.new(@projectFolder)).cleanpath.to_s
-        relFile = Pathname.new(objectFile).relative_path_from(Pathname.new(@projectFolder+"/"+relFolder)).cleanpath.to_s  
-        runFolder = @projectFolder
-      else
-        configName = Pathname.new(objectFile).relative_path_from(Pathname.new(@projectFolder)).cleanpath.to_s.split("/")[0]
-        runFolder = @projectFolder+"/"+configName  
-        relFolder = Pathname.new(File.dirname(objectFile)).relative_path_from(Pathname.new(runFolder)).cleanpath.to_s
-        relFile = Pathname.new(objectFile).relative_path_from(Pathname.new(runFolder)).cleanpath.to_s  
-      end	
-			
-      FileUtils.cd(runFolder) do
-        begin
-			      command = "gcov -l -p -o "+relFolder+" "+relFile+" > "+File.basename(objectFile)+".log"
-            Command.call(command, @logger)
-        rescue => error
-          @logger.dump error
-        end
-      end
+			runFolder = nil
+			relFolder = nil
+			relFile = nil
+			if $AppOptions[:eclipse] then
+				configName = Pathname.new(objectFile).relative_path_from(Pathname.new(@projectFolder)).cleanpath.to_s.split("/")[0]
+		        runFolder = @projectFolder+"/"+configName  
+		        relFolder = Pathname.new(File.dirname(objectFile)).relative_path_from(Pathname.new(runFolder)).cleanpath.to_s
+		        relFile = Pathname.new(objectFile).relative_path_from(Pathname.new(runFolder)).cleanpath.to_s  
+			else
+		        relFolder = Pathname.new(File.dirname(objectFile)).relative_path_from(Pathname.new(@projectFolder)).cleanpath.to_s
+		        relFile = Pathname.new(objectFile).relative_path_from(Pathname.new(@projectFolder+"/"+relFolder)).cleanpath.to_s  
+		        runFolder = @projectFolder
+			end	
+				
+	      	FileUtils.cd(runFolder) do
+		        begin
+					command = "gcov -l -p -o "+relFolder+" "+relFile+" > "+File.basename(objectFile)+".log"
+		            Command.call(command, @logger)
+		        rescue => error
+					@logger.dump error
+		        end
+			end
 		end
 	end
 	

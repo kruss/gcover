@@ -64,20 +64,20 @@ private
 				$AppOptions[:xml] = true
 			end
 
-      $AppOptions[:lake] = false
-        opts.on("-l", "--lake", "Run gcov in project-folders instead of config-folders") do
-        $AppOptions[:lake] = true
-      end
+			$AppOptions[:eclipse] = false
+				opts.on("-e", "--eclipse", "Run gcov for eclipse-builds (def: lake)") do
+				$AppOptions[:eclipse] = true
+			end
     
 			$AppOptions[:browser] = false
 				opts.on("-b", "--browser", "Open browser on output") do
 				$AppOptions[:browser] = true
 			end
 
-      $AppOptions[:verbose] = false
-        opts.on("-v", "--verbose", "Print additional logging") do
-        $AppOptions[:verbose] = true
-      end
+			$AppOptions[:verbose] = false
+				opts.on("-v", "--verbose", "Print additional logging") do
+				$AppOptions[:verbose] = true
+			end
     
 			opts.on("-h", "--help", "Display this screen") do
 				puts opts
