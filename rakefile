@@ -3,16 +3,6 @@ require 'rake/gempackagetask'
 GEM_NAME 	= "gcover"
 GEM_VERSION = "0.2.0"
 
-### ALL ###################################################
-
-desc "Complete rebuild, test, install & makefile example"
-task :all => [:clobber_package, :gem_install, :example_cover] do
-end
-
-desc "Complete clean"
-task :all_clean => [:clobber_package, :example_clean] do		
-end
-
 ### GEM ###################################################
 
 spec = Gem::Specification.new do |s|
@@ -29,152 +19,22 @@ spec = Gem::Specification.new do |s|
 	s.executables = [GEM_NAME]
 end
 Rake::GemPackageTask.new(spec) {|pkg|}
-task :gem => [:gem_test] 
+task :gem => [:test] 
 
 desc "Install the gem"
-task :gem_install => [:gem] do
+task :install => [:gem] do
     run_cmd("gem install pkg/#{spec.name}-#{spec.version}.gem")
 end
 
 desc "Uninstall the gem"
-task :gem_uninstall do
+task :uninstall do
     run_cmd("gem uninstall #{spec.name}")
 end
 
 desc "Test the gem"
-task :gem_test do
-    Dir.chdir("tests") do
-		run_cmd("ruby ts_gcover.rb")
-    end
+task :test do
+	run_cmd("ruby tests/ts_gcover.rb")
 end
-
-### MAKEFILE EXAMPLE ######################################
-
-desc "Clean makefile example"
-task :example_clean do
-
-	files = FileList.new("example/**/*.gcno")
-	files.include("example/**/*.gcda")
-	files.include("example/**/*.gcov")
-	FileUtils.rm(files)
-	FileUtils.rm_rf("example/.gcover") 
-	
-    Dir.chdir("example/Logger/Debug") do
-		run_cmd("make clean")
-    end
-    Dir.chdir("example/Logger/UnitTestLib") do
-		run_cmd("make clean")
-    end
-    Dir.chdir("example/FooLib/Debug") do
-		run_cmd("make clean")
-    end
-    Dir.chdir("example/FooLib/UnitTest") do
-		run_cmd("make clean")
-    end   
-    Dir.chdir("example/FooLib2/Debug") do
-		run_cmd("make clean")
-    end
-    Dir.chdir("example/FooLib2/UnitTest") do
-		run_cmd("make clean")
-    end  
-    Dir.chdir("example/Dummy/Debug") do
-		run_cmd("make clean")
-    end
-end
-
-desc "Build makefile example"
-task :example_build => [:example_clean] do
-
-    Dir.chdir("example/Logger/Debug") do
-		run_cmd("make all")
-    end
-    Dir.chdir("example/Logger/UnitTestLib") do
-		run_cmd("make all")
-    end
-    Dir.chdir("example/FooLib/Debug") do
-		run_cmd("make all")
-    end
-    Dir.chdir("example/FooLib/UnitTest") do
-		run_cmd("make all")
-    end
-    Dir.chdir("example/FooLib2/Debug") do
-		run_cmd("make all")
-    end
-    Dir.chdir("example/FooLib2/UnitTest") do
-		run_cmd("make all")
-    end  
-    Dir.chdir("example/Dummy/Debug") do
-		run_cmd("make all")
-    end
-end
-
-desc "Run makefile example"
-task :example_run => [:example_build] do
-
-    Dir.chdir("example/FooLib/UnitTest") do
-		run_cmd("./FooLib.exe")
-    end
-    Dir.chdir("example/FooLib2/UnitTest") do
-		run_cmd("./FooLib2.exe")
-    end   
-    Dir.chdir("example/Dummy/Debug") do
-		run_cmd("./Dummy.exe")
-    end  
-end
-
-desc "Cover makefile example"
-task :example_cover => [:example_run] do
-    run_cmd("gcover example")
-end
-
-#### CXXPROJECT EXAMPLE ####################################
-#
-#desc "Clean cxxproject example"
-#task :cxx_example_clean do
-#
-#    Dir.chdir("example/Dummy") do
-#		run_cmd("rake clobber")
-#    end
-#    Dir.chdir("example/FooLib") do
-#		run_cmd("rake clobber")
-#    end
-#    Dir.chdir("example/FooLib2") do
-#		run_cmd("rake clobber")
-#    end
-#end
-#
-#desc "Build cxxproject example"
-#task :cxx_example_build => [:cxx_example_clean] do
-#
-#    Dir.chdir("example/FooLib") do
-#		run_cmd("rake FooLib")
-#    end
-#    Dir.chdir("example/FooLib2") do
-#		run_cmd("rake FooLib2")
-#    end
-#    Dir.chdir("example/Dummy") do
-#		run_cmd("rake Dummy")
-#    end
-#end
-#
-#desc "Run cxxproject example"
-#task :cxx_example_run => [:cxx_example_build] do
-#
-#    Dir.chdir("example/FooLib/build") do
-#		run_cmd("./FooLib.exe")
-#    end
-#    Dir.chdir("example/FooLib2/build") do
-#		run_cmd("./FooLib2.exe")
-#    end  
-#    Dir.chdir("example/Dummy/build") do
-#		run_cmd("./Dummy.exe")
-#    end   
-#end
-#
-#desc "Cover cxxproject example"
-#task :cxx_example_cover => [:cxx_example_run] do
-#    run_cmd("gcover example --cxx")
-#end
 
 ### TOOLS #################################################
 

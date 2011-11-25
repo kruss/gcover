@@ -65,7 +65,7 @@ private
 			end
 
 			$AppOptions[:eclipse] = false
-				opts.on("-e", "--eclipse", "Run gcov for eclipse-builds (def: lake)") do
+				opts.on("-e", "--eclipse", "Run in build-folder (def: project-folder)") do
 				$AppOptions[:eclipse] = true
 			end
     
