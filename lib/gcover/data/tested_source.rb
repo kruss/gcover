@@ -32,10 +32,13 @@ class TestedSource
 		return sourceFileName.gsub(/\//, "#").gsub(/\.\./, "^") + ".htm"
 	end
 	
-	def createCodeCoverage
-	
+	def createCodeCoverage(logger)
 		@gcovFiles.each do |gcovFile|
-			evaluateGcovFile(gcovFile)
+			begin
+				evaluateGcovFile(gcovFile)
+			rescue => error
+				logger.warn("could not evaluate: #{gcovFile} -> #{error.inspect}")
+			end
 		end
 	end
 	

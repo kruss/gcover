@@ -73,7 +73,7 @@ class TestedProject
 	
 	def createCodeCoverage
 		@testedSources.each do |testedSource|
-			testedSource.createCodeCoverage
+			testedSource.createCodeCoverage(@logger)
 		end
 	end
 	
